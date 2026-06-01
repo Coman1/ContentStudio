@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Aviva IWR — Knowledge Studio · POC Demos</title>
+<style>
+:root{
+  --navy:#191D64;--yellow:#FFD900;--teal:#00596B;--teal-l:#CDEBEE;
+  --arize:#6C47FF;--arize-l:#F0EDFF;
+  --charcoal:#191919;--mgray:#535353;--lgray:#EEEFEE;--xgray:#F7F7F7;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:var(--xgray);color:var(--charcoal);min-height:100vh;}
+
+/* HERO */
+.hero{background:var(--navy);padding:0;position:relative;overflow:hidden;}
+.hero::after{content:'';position:absolute;bottom:0;left:0;right:0;height:5px;background:var(--yellow);}
+.hero-inner{max-width:860px;margin:0 auto;padding:52px 32px 48px;}
+.hero-logo{display:flex;align-items:baseline;gap:4px;margin-bottom:28px;}
+.hero-a{font-size:32px;font-weight:900;color:var(--yellow);letter-spacing:-1px;}
+.hero-viva{font-size:20px;font-weight:400;color:rgba(255,255,255,0.82);letter-spacing:3px;}
+.hero-div{width:1px;height:24px;background:rgba(255,255,255,0.3);margin:0 14px;align-self:center;}
+.hero-dept{font-size:15px;color:rgba(255,255,255,0.75);align-self:center;}
+.hero h1{font-size:38px;font-weight:800;color:#fff;line-height:1.15;margin-bottom:14px;letter-spacing:-0.5px;}
+.hero h1 span{color:var(--yellow);}
+.hero p{font-size:16px;color:rgba(255,255,255,0.78);line-height:1.7;max-width:580px;margin-bottom:24px;}
+.hero-chips{display:flex;gap:8px;flex-wrap:wrap;}
+.chip{display:inline-flex;align-items:center;gap:5px;font-size:12px;font-weight:600;padding:4px 11px;border-radius:20px;}
+.chip-y{background:var(--yellow);color:var(--navy);}
+.chip-n{background:rgba(255,255,255,0.12);color:rgba(255,255,255,0.88);border:1px solid rgba(255,255,255,0.2);}
+.chip-a{background:rgba(108,71,255,0.3);color:#d4c9ff;border:1px solid rgba(108,71,255,0.4);}
+
+/* MAIN */
+.main{max-width:860px;margin:0 auto;padding:44px 32px 60px;}
+
+.section-label{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.9px;color:var(--teal);margin-bottom:16px;}
+
+/* DEMO CARDS */
+.demos{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-bottom:40px;}
+@media(max-width:640px){.demos{grid-template-columns:1fr;}}
+.demo-card{background:#fff;border-radius:14px;overflow:hidden;border:1px solid #ddd;transition:transform 0.18s,box-shadow 0.18s;text-decoration:none;display:block;color:inherit;}
+.demo-card:hover{transform:translateY(-3px);box-shadow:0 12px 32px rgba(25,29,100,0.14);}
+.demo-card-accent{height:5px;}
+.demo-card-body{padding:22px 24px;}
+.demo-num{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.8px;color:var(--mgray);margin-bottom:8px;}
+.demo-title{font-size:20px;font-weight:700;color:var(--navy);margin-bottom:6px;line-height:1.25;}
+.demo-sub{font-size:13px;color:var(--mgray);line-height:1.6;margin-bottom:16px;}
+.demo-tags{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:18px;}
+.tag{font-size:11px;font-weight:600;padding:2px 8px;border-radius:20px;background:var(--teal-l);color:var(--teal);}
+.tag-a{background:var(--arize-l);color:var(--arize);}
+.demo-cta{display:inline-flex;align-items:center;gap:7px;background:var(--navy);color:#fff;font-size:13px;font-weight:600;padding:9px 18px;border-radius:8px;text-decoration:none;transition:background 0.15s;}
+.demo-cta:hover{background:#13164B;}
+.demo-cta-y{background:var(--yellow);color:var(--navy);}
+.demo-cta-y:hover{background:#FFC900;}
+.demo-pages{margin-top:14px;padding-top:14px;border-top:1px solid var(--lgray);}
+.demo-pages-label{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.6px;color:var(--mgray);margin-bottom:8px;}
+.page-list{display:flex;gap:5px;flex-wrap:wrap;}
+.page-pill{font-size:11px;background:var(--xgray);color:var(--mgray);padding:2px 8px;border-radius:10px;border:1px solid #e0e0e0;}
+
+/* INFO SECTIONS */
+.info-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:36px;}
+@media(max-width:640px){.info-grid{grid-template-columns:1fr;}}
+.info-card{background:#fff;border-radius:12px;padding:20px 22px;border:1px solid #ddd;}
+.info-card.teal{border-left:4px solid var(--teal);}
+.info-card.navy{border-left:4px solid var(--navy);}
+.info-card.arize{border-left:4px solid var(--arize);}
+.info-card.yellow{border-left:4px solid var(--yellow);}
+.info-title{font-size:13px;font-weight:700;color:var(--navy);margin-bottom:8px;display:flex;align-items:center;gap:7px;}
+.info-icon{font-size:17px;}
+.info-body{font-size:13px;color:var(--mgray);line-height:1.65;}
+.info-body li{margin-bottom:4px;padding-left:2px;}
+.info-body ul{padding-left:16px;margin-top:6px;}
+
+/* STORY SECTION */
+.story{background:#fff;border-radius:12px;padding:24px 26px;border:1px solid #ddd;margin-bottom:36px;}
+.story-title{font-size:15px;font-weight:700;color:var(--navy);margin-bottom:12px;}
+.story-steps{display:flex;gap:0;overflow-x:auto;padding-bottom:4px;}
+.step{flex-shrink:0;display:flex;align-items:flex-start;gap:0;}
+.step-content{background:var(--teal-l);border-radius:8px;padding:10px 13px;min-width:120px;max-width:140px;font-size:12px;position:relative;}
+.step-num{font-size:10px;font-weight:700;color:var(--teal);text-transform:uppercase;letter-spacing:0.5px;margin-bottom:3px;}
+.step-text{font-weight:600;color:var(--navy);line-height:1.3;}
+.step-note{font-size:11px;color:var(--mgray);margin-top:3px;}
+.step-arrow{display:flex;align-items:center;padding:0 6px;color:#999;font-size:18px;flex-shrink:0;margin-top:10px;}
+
+/* PALETTE */
+.palette{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px;}
+.swatch{display:flex;align-items:center;gap:7px;font-size:12px;}
+.swatch-dot{width:14px;height:14px;border-radius:50%;flex-shrink:0;border:1px solid rgba(0,0,0,0.08);}
+
+/* FOOTER */
+.footer{background:var(--navy);padding:28px 32px;text-align:center;margin-top:0;}
+.footer p{color:rgba(255,255,255,0.5);font-size:12px;line-height:1.7;}
+.footer a{color:rgba(255,255,255,0.7);text-decoration:none;}
+.footer a:hover{color:var(--yellow);}
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-inner">
+    <div class="hero-logo">
+      <span class="hero-a">A</span><span class="hero-viva">VIVA</span>
+      <div class="hero-div"></div>
+      <span class="hero-dept">Investments, Wealth &amp; Retirement</span>
+    </div>
+    <h1>Knowledge Studio<br><span>POC Demos</span></h1>
+    <p>Interactive proof-of-concept demos for the IWR Knowledge Platform — showing how knowledge is ingested, curated, evaluated, trained from, and served to both AI agents and human handlers from a single source of truth.</p>
+    <div class="hero-chips">
+      <span class="chip chip-y">IWR · Pensions &amp; Wealth</span>
+      <span class="chip chip-n">MVP v0.1</span>
+      <span class="chip chip-n">Concept demo — no live data</span>
+      <span class="chip chip-a">Arize AX integrated</span>
+    </div>
+  </div>
+</div>
+
+<div class="main">
+
+  <!-- DEMOS -->
+  <div class="section-label">The demos</div>
+  <div class="demos">
+
+    <!-- DEMO 1 -->
+    <a class="demo-card" href="knowledge-ingestion-tool.html">
+      <div class="demo-card-accent" style="background:var(--teal);"></div>
+      <div class="demo-card-body">
+        <div class="demo-num">Demo 1 — Foundation layer</div>
+        <div class="demo-title">Knowledge Ingestion Tool</div>
+        <div class="demo-sub">The pipeline that connects SharePoint, PDFs, and Word documents to the knowledge store — with evaluation, governance, and Arize AX observability.</div>
+        <div class="demo-tags">
+          <span class="tag">Ingestion</span>
+          <span class="tag">Knowledge store</span>
+          <span class="tag">Evaluations</span>
+          <span class="tag tag-a">Arize AX</span>
+          <span class="tag">RBAC</span>
+          <span class="tag">Audit log</span>
+        </div>
+        <span class="demo-cta">Open demo →</span>
+        <div class="demo-pages">
+          <div class="demo-pages-label">9 sections to explore</div>
+          <div class="page-list">
+            <span class="page-pill">Dashboard</span>
+            <span class="page-pill">Ingestion</span>
+            <span class="page-pill">Knowledge store</span>
+            <span class="page-pill">Editor</span>
+            <span class="page-pill">Evaluations</span>
+            <span class="page-pill">Arize AX</span>
+            <span class="page-pill">Published pages</span>
+            <span class="page-pill">RBAC</span>
+            <span class="page-pill">Audit log</span>
+          </div>
+        </div>
+      </div>
+    </a>
+
+    <!-- DEMO 2 -->
+    <a class="demo-card" href="knowledge-studio.html">
+      <div class="demo-card-accent" style="background:var(--yellow);"></div>
+      <div class="demo-card-body">
+        <div class="demo-num">Demo 2 — Full studio</div>
+        <div class="demo-title">Knowledge Studio</div>
+        <div class="demo-sub">The complete content environment — ingestion tool plus curation, training builder, certifications, agent lab, collaboration and sign-off.</div>
+        <div class="demo-tags">
+          <span class="tag">Curation</span>
+          <span class="tag">Training builder</span>
+          <span class="tag">Certifications</span>
+          <span class="tag">Agent lab</span>
+          <span class="tag tag-a">Arize AX</span>
+          <span class="tag">Reviews</span>
+        </div>
+        <span class="demo-cta demo-cta-y">Open demo →</span>
+        <div class="demo-pages">
+          <div class="demo-pages-label">14 sections to explore</div>
+          <div class="page-list">
+            <span class="page-pill">Dashboard</span>
+            <span class="page-pill">Ingestion</span>
+            <span class="page-pill">Curation studio</span>
+            <span class="page-pill">Training builder</span>
+            <span class="page-pill">Certifications</span>
+            <span class="page-pill">Agent lab</span>
+            <span class="page-pill">Evaluations</span>
+            <span class="page-pill">Arize AX</span>
+            <span class="page-pill">Published pages</span>
+            <span class="page-pill">Reviews</span>
+            <span class="page-pill">RBAC</span>
+            <span class="page-pill">Audit log</span>
+            <span class="page-pill">Editor</span>
+            <span class="page-pill">Knowledge store</span>
+          </div>
+        </div>
+      </div>
+    </a>
+
+  </div>
+
+  <!-- STORY -->
+  <div class="section-label">Demo narrative</div>
+  <div class="story">
+    <div class="story-title">The thread running through both demos</div>
+    <p style="font-size:13px;color:var(--mgray);margin-bottom:16px;line-height:1.6;">A GAD (Government Actuary's Department) rate change in a pensions knowledge file has caused an accuracy failure. Follow the same event through every layer of the platform.</p>
+    <div class="story-steps">
+      <div class="step">
+        <div class="step-content">
+          <div class="step-num">01 Dashboard</div>
+          <div class="step-text">Arize alert fires</div>
+          <div class="step-note">Hallucination rate up to 4.2%</div>
+        </div>
+        <div class="step-arrow">→</div>
+      </div>
+      <div class="step">
+        <div class="step-content">
+          <div class="step-num">02 Ingestion</div>
+          <div class="step-text">Source change detected</div>
+          <div class="step-note">Rate updated 2.75% → 3.25%</div>
+        </div>
+        <div class="step-arrow">→</div>
+      </div>
+      <div class="step">
+        <div class="step-content">
+          <div class="step-num">03 Curation</div>
+          <div class="step-text">Conflict flagged</div>
+          <div class="step-note">Two files contradict each other</div>
+        </div>
+        <div class="step-arrow">→</div>
+      </div>
+      <div class="step">
+        <div class="step-content">
+          <div class="step-num">04 Editor</div>
+          <div class="step-text">Fix applied</div>
+          <div class="step-note">Eval gate blocks publish</div>
+        </div>
+        <div class="step-arrow">→</div>
+      </div>
+      <div class="step">
+        <div class="step-content">
+          <div class="step-num">05 Evaluations</div>
+          <div class="step-text">Re-run passes</div>
+          <div class="step-note">Accuracy 93% · Gate clears</div>
+        </div>
+        <div class="step-arrow">→</div>
+      </div>
+      <div class="step">
+        <div class="step-content">
+          <div class="step-num">06 Training</div>
+          <div class="step-text">Module flagged</div>
+          <div class="step-note">Auto-sync with knowledge change</div>
+        </div>
+        <div class="step-arrow">→</div>
+      </div>
+      <div class="step">
+        <div class="step-content" style="background:#EEEDFE;">
+          <div class="step-num" style="color:var(--arize);">07 Arize AX</div>
+          <div class="step-text" style="color:var(--navy);">Full trace visible</div>
+          <div class="step-note">Root cause, guardrail trips</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- INFO -->
+  <div class="section-label">What these demos cover</div>
+  <div class="info-grid">
+    <div class="info-card teal">
+      <div class="info-title"><span class="info-icon">🔗</span> Ingestion layer</div>
+      <div class="info-body">Connects to SharePoint (Modern and Classic), PDF, and Word documents. Incremental sync, metadata extraction, pipeline status visible to non-technical users, and a manual upload interface.</div>
+    </div>
+    <div class="info-card navy">
+      <div class="info-title"><span class="info-icon">📁</span> Knowledge store</div>
+      <div class="info-body">Single source of truth with version history, diff view, rollback, domain segregation (Pensions / Wealth), and sensitivity classification (Internal / Restricted / Highly Restricted).</div>
+    </div>
+    <div class="info-card teal">
+      <div class="info-title"><span class="info-icon">✏️</span> Curation studio</div>
+      <div class="info-body">Knowledge gap queue from agent failures, automated conflict detection between files, freshness scoring, AI writing assistant, and Consumer Duty readability scoring inline in the editor.</div>
+    </div>
+    <div class="info-card navy">
+      <div class="info-title"><span class="info-icon">🎓</span> Training builder</div>
+      <div class="info-body">Generate training modules and assessments from knowledge files. Auto-sync when source knowledge changes. Certification pathways for handlers and advisers. Learning analytics.</div>
+    </div>
+    <div class="info-card arize">
+      <div class="info-title"><span class="info-icon">🔬</span> Agent lab</div>
+      <div class="info-body">No-code prompt playground, retrieval inspector, A/B knowledge testing, agent configuration, and guardrail builder — all without engineering involvement.</div>
+    </div>
+    <div class="info-card arize">
+      <div class="info-title"><span class="info-icon">📊</span> Arize AX integration</div>
+      <div class="info-body">LLM tracing with span waterfall, hallucination detection, guardrail trip alerts, experiment tracking, production monitors, and annotation queue for human review.</div>
+    </div>
+    <div class="info-card yellow">
+      <div class="info-title"><span class="info-icon">👥</span> Reviews &amp; sign-off</div>
+      <div class="info-body">Structured review workflows, SME portal accessible via email link (no platform account needed), compliance sign-off trail exportable for FCA audit.</div>
+    </div>
+    <div class="info-card yellow">
+      <div class="info-title"><span class="info-icon">🛡️</span> Governance</div>
+      <div class="info-body">Role-based access control with Entra ID SSO, immutable audit log, sensitivity tiers, 7-year retention, and publish gates linked to evaluation results.</div>
+    </div>
+  </div>
+
+  <!-- PALETTE -->
+  <div class="section-label">Design system</div>
+  <div class="info-card teal" style="margin-bottom:36px;">
+    <div class="info-title"><span class="info-icon">🎨</span> Aviva ION — Investments &amp; Wealth palette</div>
+    <div class="info-body">Built to Aviva brand standards using the IWR colour palette from the ION design system.</div>
+    <div class="palette">
+      <div class="swatch"><div class="swatch-dot" style="background:#191D64;"></div><span><strong>#191D64</strong> Navy — primary</span></div>
+      <div class="swatch"><div class="swatch-dot" style="background:#FFD900;border-color:#ddd;"></div><span><strong>#FFD900</strong> Yellow — signature</span></div>
+      <div class="swatch"><div class="swatch-dot" style="background:#00596B;"></div><span><strong>#00596B</strong> Teal — secondary</span></div>
+      <div class="swatch"><div class="swatch-dot" style="background:#CDEBEE;"></div><span><strong>#CDEBEE</strong> Light teal — surface</span></div>
+      <div class="swatch"><div class="swatch-dot" style="background:#6C47FF;"></div><span><strong>#6C47FF</strong> Arize purple</span></div>
+    </div>
+  </div>
+
+  <!-- NOTES -->
+  <div class="section-label">Important notes</div>
+  <div style="background:#fff;border-radius:12px;padding:20px 22px;border:1px solid #ddd;border-left:4px solid #d97706;">
+    <p style="font-size:13px;color:var(--mgray);line-height:1.7;margin-bottom:8px;"><strong style="color:var(--charcoal);">These are concept demos, not production software.</strong> All names, data, and scenarios are fictional. No real customer, colleague, or Aviva data is used anywhere.</p>
+    <p style="font-size:13px;color:var(--mgray);line-height:1.7;margin-bottom:8px;">The demos run entirely in your browser — no server, no backend, no data sent anywhere. All interactions are simulated.</p>
+    <p style="font-size:13px;color:var(--mgray);line-height:1.7;">They illustrate the requirements set out in the <em>Knowledge Ingestion Tool MVP Requirements v0.2</em> and <em>Content Studio MVP Requirements v0.1</em> documents. Technology choices for the actual build are defined separately.</p>
+  </div>
+
+</div>
+
+<!-- FOOTER -->
+<div class="footer">
+  <p>Aviva IWR · Knowledge Studio POC · AI Workstream<br>
+  <a href="knowledge-ingestion-tool.html">Demo 1 — Ingestion Tool</a> &nbsp;·&nbsp;
+  <a href="knowledge-studio.html">Demo 2 — Knowledge Studio</a> &nbsp;·&nbsp;
+  <a href="https://arize.com/generative-ai/" target="_blank" rel="noopener">Arize AI</a><br>
+  <span style="opacity:0.5;font-size:11px;margin-top:6px;display:block;">Concept demo only — no live data — no Aviva infrastructure</span>
+  </p>
+</div>
+
+</body>
+</html>

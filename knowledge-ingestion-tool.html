@@ -1,0 +1,805 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Aviva IWR — Enterprise Knowledge Platform</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3.19.0/dist/tabler-icons.min.css">
+<style>
+/* ── AVIVA ION DESIGN SYSTEM — INVESTMENTS / WEALTH PALETTE ── */
+:root {
+  /* Core brand */
+  --navy:   #191D64;  /* dark blue — primary brand */
+  --navy-d: #13164B;  /* shade */
+  --navy-l: #E4E3FF;  /* light purple tint */
+  --yellow: #FFD900;  /* signature Aviva yellow */
+  --yellow-s:#FFC900; /* yellow shade */
+  --sand:   #FFF9E3;  /* sand — warm light surface */
+
+  /* Teal */
+  --teal:   #00596B;  /* dark teal */
+  --teal-l: #CDEBEE;  /* light teal surface */
+  --teal-ll:#EBF7F8;  /* tint */
+
+  /* Neutrals */
+  --charcoal:#191919;
+  --dgray:   #333333;
+  --mgray:   #535353;
+  --lgray:   #EEEFEE;
+  --xgray:   #F7F7F7;
+  --white:   #FFFFFF;
+  --bd:      #D8D8D8;
+
+  /* Arize */
+  --arize:  #6C47FF;
+  --arize-l:#F0EDFF;
+  --arize-d:#4B2FD4;
+
+  /* Semantic */
+  --s:#1a7f4b; --sl:#e6f7ee;
+  --w:#8a5000; --wl:#FFF9E3;
+  --danger:#a32d2d; --dl:#fcebeb;
+  --info:#1C4FD2; --il:#E6F3FE;
+
+  --r:8px; --rl:12px; --sw:232px; --hh:60px;
+}
+
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;font-size:14px;color:var(--charcoal);background:var(--xgray);display:flex;flex-direction:column;min-height:100vh;}
+
+/* ── HEADER — navy + yellow accent bar ── */
+.hdr{height:var(--hh);background:var(--navy);display:flex;align-items:center;padding:0 22px;gap:14px;flex-shrink:0;position:relative;}
+.hdr::after{content:'';position:absolute;bottom:0;left:0;right:0;height:4px;background:var(--yellow);}
+.hdr-logo{display:flex;align-items:center;gap:10px;}
+.hdr-logotype{display:flex;align-items:baseline;gap:1px;}
+.hdr-a{font-size:28px;font-weight:900;color:var(--yellow);letter-spacing:-1px;line-height:1;}
+.hdr-viva{font-size:17px;font-weight:400;color:rgba(255,255,255,0.9);letter-spacing:3px;line-height:1;}
+.hdr-div{width:1px;height:26px;background:rgba(255,255,255,0.25);margin:0 14px;}
+.hdr-prod{color:rgba(255,255,255,0.85);font-size:13px;font-weight:400;}
+.hdr-sp{flex:1;}
+.hdr-chip{font-size:11px;padding:3px 10px;border-radius:20px;font-weight:600;}
+.hdr-chip.navy{background:rgba(255,255,255,0.12);color:rgba(255,255,255,0.88);border:1px solid rgba(255,255,255,0.2);}
+.hdr-chip.yellow{background:var(--yellow);color:var(--navy);border:none;}
+.hdr-chip.arize{background:rgba(108,71,255,0.3);color:#d4c9ff;border:1px solid rgba(108,71,255,0.4);}
+.hdr-user{display:flex;align-items:center;gap:8px;color:rgba(255,255,255,0.85);font-size:13px;margin-left:14px;cursor:pointer;}
+.hdr-av{width:30px;height:30px;border-radius:50%;background:var(--yellow);display:flex;align-items:center;justify-content:center;font-weight:800;font-size:11px;color:var(--navy);}
+
+/* ── LAYOUT ── */
+.body{display:flex;flex:1;overflow:hidden;}
+
+/* ── SIDEBAR ── */
+.sidebar{width:var(--sw);background:var(--white);border-right:1px solid var(--bd);display:flex;flex-direction:column;flex-shrink:0;}
+.sb-stripe{height:3px;background:var(--yellow);}
+.sb-sec{padding:14px 10px 6px;}
+.sb-lbl{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.9px;color:var(--mgray);padding:0 8px 5px;}
+.nav{display:flex;align-items:center;gap:9px;padding:7px 10px;border-radius:var(--r);cursor:pointer;color:var(--mgray);font-size:13px;font-weight:500;margin-bottom:2px;transition:all 0.13s;border:1px solid transparent;}
+.nav:hover{background:var(--xgray);color:var(--charcoal);}
+.nav.active{background:var(--teal-ll);color:var(--teal);border-color:rgba(0,89,107,0.2);}
+.nav i{font-size:17px;flex-shrink:0;}
+.nb{margin-left:auto;font-size:10px;padding:1px 6px;border-radius:10px;font-weight:700;}
+.nb-w{background:#d97706;color:#fff;}
+.nb-a{background:var(--arize);color:#fff;}
+.sb-foot{margin-top:auto;padding:12px 10px;border-top:1px solid var(--bd);}
+.dom-pill{display:inline-flex;align-items:center;gap:5px;background:var(--teal-l);color:var(--teal);font-size:11px;padding:3px 9px;border-radius:20px;font-weight:600;margin-bottom:5px;}
+.arize-sb{display:flex;align-items:center;gap:6px;background:var(--arize-l);border-radius:var(--r);padding:7px 10px;margin-top:8px;border:1px solid rgba(108,71,255,0.2);cursor:pointer;}
+.arize-sb span{font-size:11px;font-weight:600;color:var(--arize);}
+.live-dot{width:6px;height:6px;border-radius:50%;background:#22c55e;margin-left:auto;flex-shrink:0;}
+
+/* ── MAIN ── */
+.main{flex:1;overflow-y:auto;padding:24px;}
+.page{display:none;}.page.active{display:block;}
+.ph{margin-bottom:22px;}
+.ph h1{font-size:22px;font-weight:700;color:var(--charcoal);}
+.ph p{color:var(--mgray);font-size:13px;margin-top:3px;}
+.ph-acts{display:flex;gap:8px;margin-top:14px;flex-wrap:wrap;}
+
+/* ── BUTTONS ── */
+.btn{display:inline-flex;align-items:center;gap:6px;padding:7px 14px;border-radius:var(--r);font-size:13px;font-weight:500;cursor:pointer;border:1px solid var(--bd);background:var(--white);color:var(--charcoal);transition:background 0.12s;font-family:inherit;}
+.btn:hover{background:var(--xgray);}
+.btn-p{background:var(--navy);color:var(--white);border-color:var(--navy);}
+.btn-p:hover{background:var(--navy-d);}
+.btn-y{background:var(--yellow);color:var(--navy);border-color:var(--yellow-s);font-weight:700;}
+.btn-y:hover{background:var(--yellow-s);}
+.btn-arize{background:var(--arize);color:#fff;border-color:var(--arize-d);}
+.btn-arize:hover{background:var(--arize-d);}
+.btn-g{border-color:transparent;background:transparent;}
+.btn-g:hover{background:var(--xgray);}
+.btn-sm{padding:4px 10px;font-size:12px;}
+
+/* ── CARDS ── */
+.card{background:var(--white);border:1px solid var(--bd);border-radius:var(--rl);padding:18px;margin-bottom:14px;}
+.card-sm{padding:13px 15px;}
+.ch{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;}
+.ct{font-size:15px;font-weight:600;color:var(--charcoal);}
+
+/* ── YELLOW ACCENT CARD ── */
+.card-accent{background:var(--yellow);border:none;border-radius:var(--rl);padding:16px 18px;margin-bottom:14px;}
+.card-accent .ct{color:var(--navy);}
+
+/* ── NAVY ACCENT CARD ── */
+.card-navy{background:var(--navy);border:none;border-radius:var(--rl);padding:16px 18px;margin-bottom:14px;}
+.card-navy .ct{color:var(--white);}
+.card-navy p{color:rgba(255,255,255,0.75);}
+
+/* ── GRID ── */
+.g4{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:18px;}
+.g3{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:16px;}
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
+.sc{background:var(--white);border:1px solid var(--bd);border-radius:var(--rl);padding:15px;}
+.sc-l{font-size:12px;color:var(--mgray);font-weight:500;margin-bottom:5px;}
+.sc-v{font-size:26px;font-weight:700;color:var(--charcoal);line-height:1;}
+.sc-d{font-size:11px;color:var(--s);margin-top:3px;}
+.sc-d.dn{color:var(--danger);}
+.sc-d.n{color:var(--mgray);}
+
+/* ── STAT CARD YELLOW ── */
+.sc-y{background:var(--yellow);border:none;border-radius:var(--rl);padding:15px;}
+.sc-y .sc-l{color:var(--navy);opacity:0.75;}
+.sc-y .sc-v{color:var(--navy);}
+
+/* ── BADGES ── */
+.bdg{display:inline-flex;align-items:center;gap:3px;font-size:11px;font-weight:600;padding:2px 8px;border-radius:20px;}
+.bdg-s{background:var(--sl);color:var(--s);}
+.bdg-w{background:var(--wl);color:var(--w);}
+.bdg-d{background:var(--dl);color:var(--danger);}
+.bdg-i{background:var(--il);color:var(--info);}
+.bdg-n{background:var(--lgray);color:var(--mgray);}
+.bdg-t{background:var(--teal-l);color:var(--teal);}
+.bdg-y{background:var(--yellow);color:var(--navy);font-weight:700;}
+.bdg-nv{background:var(--navy);color:var(--white);}
+.bdg-arize{background:var(--arize-l);color:var(--arize);}
+
+/* ── TABLE ── */
+.tbl{width:100%;border-collapse:collapse;font-size:13px;}
+.tbl th{text-align:left;padding:7px 11px;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.5px;color:var(--mgray);background:var(--xgray);border-bottom:1px solid var(--bd);}
+.tbl td{padding:9px 11px;border-bottom:1px solid var(--lgray);vertical-align:middle;}
+.tbl tr:last-child td{border-bottom:none;}
+.tbl tr:hover td{background:var(--xgray);}
+
+/* ── PROGRESS BAR ── */
+.pb{height:5px;background:var(--lgray);border-radius:3px;overflow:hidden;}
+.pf{height:100%;border-radius:3px;background:var(--teal);transition:width 1s;}
+.pf-y{background:var(--yellow);}
+.pf-w{background:#d97706;}
+.pf-d{background:var(--danger);}
+.pf-n{background:var(--navy);}
+
+/* ── FORM ── */
+.fg{margin-bottom:13px;}
+.fl{display:block;font-size:11px;font-weight:700;color:var(--mgray);margin-bottom:4px;text-transform:uppercase;letter-spacing:0.4px;}
+.fc{width:100%;padding:7px 11px;border:1px solid var(--bd);border-radius:var(--r);font-size:13px;color:var(--charcoal);background:var(--white);outline:none;transition:border-color 0.13s;font-family:inherit;}
+.fc:focus{border-color:var(--navy);}
+textarea.fc{resize:vertical;min-height:70px;}
+
+/* ── NOTIFICATIONS ── */
+.notif{display:flex;align-items:flex-start;gap:9px;padding:11px 13px;border-radius:var(--r);margin-bottom:13px;}
+.notif.s{background:var(--sl);color:var(--s);}
+.notif.w{background:var(--wl);color:var(--w);border:1px solid #d9770640;}
+.notif.i{background:var(--il);color:var(--info);}
+.notif.y{background:var(--yellow);color:var(--navy);}
+.notif.arize{background:var(--arize-l);color:var(--arize);border:1px solid rgba(108,71,255,0.2);}
+.notif i{font-size:16px;flex-shrink:0;margin-top:1px;}
+.notif-b{font-size:12px;line-height:1.5;}
+
+/* ── SOURCE ITEMS ── */
+.src{display:flex;align-items:center;gap:11px;padding:11px;border:1px solid var(--bd);border-radius:var(--r);margin-bottom:7px;background:var(--white);}
+.src-ic{width:34px;height:34px;border-radius:var(--r);display:flex;align-items:center;justify-content:center;font-size:17px;flex-shrink:0;}
+.src-ic.sp{background:#E4E3FF;color:#26193E;}
+.src-ic.pdf{background:var(--dl);color:var(--danger);}
+.src-ic.doc{background:var(--il);color:var(--info);}
+.src-ic.web{background:var(--teal-l);color:var(--teal);}
+
+/* ── KNOWLEDGE ITEMS ── */
+.ki{border:1px solid var(--bd);border-radius:var(--rl);padding:13px 15px;margin-bottom:9px;background:var(--white);display:flex;align-items:flex-start;gap:13px;cursor:pointer;transition:border-color 0.13s;}
+.ki:hover{border-color:var(--navy);}
+.ki-ic{width:36px;height:36px;border-radius:var(--r);background:var(--teal-l);color:var(--teal);display:flex;align-items:center;justify-content:center;font-size:17px;flex-shrink:0;}
+.ki-body{flex:1;min-width:0;}
+.ki-t{font-weight:600;font-size:13px;margin-bottom:3px;}
+.ki-m{font-size:11px;color:var(--mgray);display:flex;gap:10px;align-items:center;flex-wrap:wrap;}
+
+/* ── EVAL RINGS ── */
+.ev-ring{display:flex;flex-direction:column;align-items:center;gap:3px;}
+.ev-score{font-size:28px;font-weight:700;}
+.ev-score.p{color:var(--s);}
+.ev-score.w{color:#d97706;}
+.ev-score.f{color:var(--danger);}
+.ev-lbl{font-size:10px;color:var(--mgray);font-weight:600;text-transform:uppercase;}
+.ev-row{display:flex;align-items:center;gap:11px;margin-bottom:9px;}
+.ev-n{font-size:12px;font-weight:500;width:150px;flex-shrink:0;}
+.ev-bw{flex:1;}
+.ev-pct{font-size:12px;font-weight:700;width:38px;text-align:right;}
+
+/* ── ARIZE PANEL ── */
+.arize-hdr{background:var(--arize);color:#fff;border-radius:var(--r) var(--r) 0 0;padding:12px 16px;display:flex;align-items:center;gap:9px;}
+.arize-logo{font-size:15px;font-weight:800;letter-spacing:-0.4px;}
+.arize-sub{font-size:11px;opacity:0.8;margin-left:auto;}
+.arize-body{background:#faf9ff;border:1px solid rgba(108,71,255,0.18);border-top:none;border-radius:0 0 var(--r) var(--r);padding:14px;}
+.am{display:flex;justify-content:space-between;align-items:center;padding:7px 0;border-bottom:1px solid rgba(108,71,255,0.1);font-size:12px;}
+.am:last-child{border-bottom:none;}
+.am-v{font-weight:700;color:var(--arize);}
+.a-trace{background:var(--white);border:1px solid rgba(108,71,255,0.15);border-radius:var(--r);padding:10px 12px;margin-top:10px;font-size:11px;color:var(--mgray);}
+.a-trace code{background:rgba(108,71,255,0.08);color:var(--arize);padding:1px 5px;border-radius:3px;font-family:monospace;}
+.a-span{display:flex;align-items:center;gap:8px;padding:5px 0;border-bottom:1px solid var(--lgray);font-size:11px;}
+.a-span:last-child{border-bottom:none;}
+.a-span-bar{height:4px;background:var(--arize);border-radius:2px;opacity:0.7;}
+.a-tag{display:inline-block;background:rgba(108,71,255,0.1);color:var(--arize);font-size:10px;padding:1px 6px;border-radius:3px;font-weight:600;margin-left:4px;}
+.gr-row{display:flex;align-items:center;justify-content:space-between;padding:6px 0;border-bottom:1px solid var(--lgray);font-size:12px;}
+.gr-row:last-child{border-bottom:none;}
+.gr-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0;}
+.mon-card{background:var(--white);border:1px solid rgba(108,71,255,0.15);border-radius:var(--r);padding:10px 12px;margin-bottom:8px;}
+
+/* ── TIMELINE ── */
+.tl-i{display:flex;gap:11px;margin-bottom:11px;}
+.tl-dot{width:8px;height:8px;border-radius:50%;background:var(--navy);margin-top:5px;flex-shrink:0;position:relative;}
+.tl-dot::after{content:'';position:absolute;left:3px;top:8px;width:2px;height:calc(100% + 11px);background:var(--bd);}
+.tl-i:last-child .tl-dot::after{display:none;}
+.tl-t{font-size:13px;font-weight:500;}
+.tl-s{font-size:11px;color:var(--mgray);}
+
+/* ── SENSITIVITY ── */
+.sens-r{background:var(--wl);color:var(--w);border:1px solid #d977064a;font-size:10px;padding:1px 6px;border-radius:3px;font-weight:600;}
+.sens-i{background:var(--il);color:var(--info);border:1px solid rgba(28,79,210,0.25);font-size:10px;padding:1px 6px;border-radius:3px;font-weight:600;}
+.dom-t{display:inline-flex;align-items:center;gap:3px;background:var(--teal-l);color:var(--teal);font-size:11px;padding:2px 7px;border-radius:20px;font-weight:600;}
+
+/* ── AUDIT ROWS ── */
+.adr{display:flex;align-items:flex-start;gap:11px;padding:9px 0;border-bottom:1px solid var(--lgray);}
+.adr:last-child{border-bottom:none;}
+.av8{width:26px;height:26px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;flex-shrink:0;}
+.adr-b{flex:1;}
+.adr-a{font-size:12px;line-height:1.4;}
+.adr-t{font-size:11px;color:var(--mgray);margin-top:2px;}
+
+/* ── INGESTION STEPS ── */
+.ing-s{display:flex;align-items:center;gap:9px;padding:7px 11px;border-radius:var(--r);margin-bottom:5px;font-size:12px;}
+.ing-s.done{background:var(--sl);color:var(--s);}
+.ing-s.active{background:var(--il);color:var(--info);}
+.ing-s.pend{background:var(--xgray);color:var(--mgray);}
+
+/* ── EDITOR ── */
+.ed-tb{display:flex;gap:3px;padding:7px 11px;border-bottom:1px solid var(--bd);flex-wrap:wrap;background:var(--xgray);}
+.ed-btn{padding:3px 7px;border:none;background:none;cursor:pointer;border-radius:3px;font-size:13px;color:var(--mgray);}
+.ed-btn:hover{background:var(--lgray);color:var(--charcoal);}
+.ed-content{min-height:190px;padding:14px;font-family:inherit;font-size:13px;line-height:1.7;outline:none;color:var(--charcoal);}
+
+/* ── KNOWLEDGE VIEW ── */
+.kv h2{font-size:15px;font-weight:600;margin:16px 0 7px;color:var(--charcoal);}
+.kv p{font-size:13px;color:var(--mgray);line-height:1.7;margin-bottom:9px;}
+.kv .callout{background:var(--teal-l);border-left:3px solid var(--teal);padding:9px 13px;border-radius:0 var(--r) var(--r) 0;margin:11px 0;}
+.kv .callout p{color:var(--teal);margin:0;font-weight:500;}
+
+/* ── TOAST ── */
+.toast{position:fixed;bottom:22px;right:22px;background:var(--navy);color:#fff;padding:9px 16px;border-radius:var(--rl);font-size:13px;display:flex;align-items:center;gap:7px;z-index:9999;transform:translateY(70px);opacity:0;transition:transform 0.28s,opacity 0.28s;pointer-events:none;border-bottom:3px solid var(--yellow);}
+.toast.show{transform:translateY(0);opacity:1;}
+
+/* ── MODAL ── */
+.mo{position:fixed;inset:0;background:rgba(25,29,100,0.45);z-index:1000;display:none;align-items:center;justify-content:center;}
+.mo.open{display:flex;}
+.mo-box{background:var(--white);border-radius:var(--rl);width:510px;max-width:95vw;overflow:hidden;border-top:4px solid var(--yellow);}
+.mo-hdr{padding:16px 18px;border-bottom:1px solid var(--bd);display:flex;align-items:center;justify-content:space-between;}
+.mo-t{font-size:15px;font-weight:600;color:var(--charcoal);}
+.mo-body{padding:18px;}
+.mo-foot{padding:12px 18px;border-top:1px solid var(--bd);display:flex;justify-content:flex-end;gap:8px;}
+
+::-webkit-scrollbar{width:5px;}
+::-webkit-scrollbar-track{background:transparent;}
+::-webkit-scrollbar-thumb{background:var(--bd);border-radius:3px;}
+</style>
+
+<!-- HEADER -->
+<div class="hdr">
+  <div class="hdr-logo">
+    <div class="hdr-logotype">
+      <span class="hdr-a">A</span><span class="hdr-viva">VIVA</span>
+    </div>
+  </div>
+  <div class="hdr-div"></div>
+  <span class="hdr-prod">Enterprise Knowledge Platform</span>
+  <div class="hdr-sp"></div>
+  <span class="hdr-chip yellow">IWR · Investments</span>
+  <span class="hdr-chip navy" style="margin-left:6px;">Pensions &amp; Wealth</span>
+  <span class="hdr-chip arize" style="margin-left:6px;">Arize AX connected</span>
+  <span class="hdr-chip navy" style="margin-left:6px;">MVP v0.1</span>
+  <div class="hdr-user" style="margin-left:14px;">
+    <div class="hdr-av">JT</div>
+    <span>Jack Thomson</span>
+  </div>
+</div>
+
+<div class="body">
+<!-- SIDEBAR -->
+<nav class="sidebar">
+  <div class="sb-stripe"></div>
+  <div class="sb-sec">
+    <div class="sb-lbl">Overview</div>
+    <div class="nav active" onclick="nav('dashboard')"><i class="ti ti-layout-dashboard"></i> Dashboard</div>
+  </div>
+  <div class="sb-sec">
+    <div class="sb-lbl">Knowledge</div>
+    <div class="nav" onclick="nav('ingestion')"><i class="ti ti-upload"></i> Ingestion <span class="nb nb-w" id="ing-b">3</span></div>
+    <div class="nav" onclick="nav('knowledge')"><i class="ti ti-files"></i> Knowledge store</div>
+    <div class="nav" onclick="nav('editor')"><i class="ti ti-edit"></i> Editor</div>
+    <div class="nav" onclick="nav('pages')"><i class="ti ti-layout-2"></i> Published pages</div>
+  </div>
+  <div class="sb-sec">
+    <div class="sb-lbl">Quality</div>
+    <div class="nav" onclick="nav('evals')"><i class="ti ti-test-pipe"></i> Evaluations <span class="nb nb-w" id="ev-b">1</span></div>
+    <div class="nav" onclick="nav('arize')"><i class="ti ti-activity"></i> Arize AX <span class="nb nb-a">Live</span></div>
+  </div>
+  <div class="sb-sec">
+    <div class="sb-lbl">Governance</div>
+    <div class="nav" onclick="nav('governance')"><i class="ti ti-shield-check"></i> Access &amp; RBAC</div>
+    <div class="nav" onclick="nav('audit')"><i class="ti ti-history"></i> Audit log</div>
+  </div>
+  <div class="sb-foot">
+    <div style="font-size:10px;color:var(--mgray);margin-bottom:7px;font-weight:700;text-transform:uppercase;letter-spacing:0.7px;">Active domains</div>
+    <div class="dom-pill"><i class="ti ti-chart-bar" style="font-size:12px"></i> Pensions</div><br>
+    <div class="dom-pill" style="margin-top:5px;"><i class="ti ti-building-bank" style="font-size:12px"></i> Wealth</div>
+    <div class="arize-sb" onclick="nav('arize')">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" fill="#6C47FF"/><path d="M8 16l4-8 4 8M9.5 13h5" stroke="white" stroke-width="1.8" stroke-linecap="round"/></svg>
+      <span>Arize AX · Connected</span>
+      <div class="live-dot"></div>
+    </div>
+  </div>
+</nav>
+
+<main class="main">
+
+<!-- ═══ DASHBOARD ═══ -->
+<div class="page active" id="page-dashboard">
+  <div class="ph">
+    <h1>Good morning, Jack</h1>
+    <p>IWR Knowledge Platform · Pensions &amp; Wealth · Last sync 07:00 today</p>
+  </div>
+
+  <div class="notif w"><i class="ti ti-alert-triangle"></i><div class="notif-b"><strong>Eval gate active:</strong> Drawdown Guidance v1.4 — accuracy 81% (threshold 90%) after GAD rate update. Publish blocked. <span style="text-decoration:underline;cursor:pointer;font-weight:600;" onclick="nav('evals')">Review in Evaluations →</span></div></div>
+  <div class="notif arize"><i class="ti ti-activity"></i><div class="notif-b"><strong>Arize AX alert:</strong> Pensions Guidance Agent — hallucination rate 4.2% (baseline 1.8%). Correlated with Drawdown Guidance edit at 06:48. <span style="text-decoration:underline;cursor:pointer;" onclick="nav('arize')">View trace →</span></div></div>
+
+  <div class="g4">
+    <div class="sc-y"><div class="sc-l">Knowledge files</div><div class="sc-v">142</div><div class="sc-d n" style="color:rgba(25,29,100,0.6)">↑ 12 this week</div></div>
+    <div class="sc"><div class="sc-l">Eval pass rate</div><div class="sc-v">94%</div><div class="sc-d dn">↓ 2% since Mon</div></div>
+    <div class="sc"><div class="sc-l">Pending review</div><div class="sc-v">7</div><div class="sc-d dn">3 overdue</div></div>
+    <div class="sc"><div class="sc-l">Arize traces today</div><div class="sc-v">1,847</div><div class="sc-d n">Across 2 agents</div></div>
+  </div>
+
+  <div class="g2">
+    <div class="card">
+      <div class="ch"><span class="ct">Recent activity</span><button class="btn btn-g btn-sm" onclick="nav('audit')">View all</button></div>
+      <div class="tl-i"><div class="tl-dot" style="background:#d97706"></div><div><div class="tl-t">Drawdown Guidance v1.4 — Arize eval flagged</div><div class="tl-s">Today 07:12 · Trace ekp-2025-0530-d14</div></div></div>
+      <div class="tl-i"><div class="tl-dot" style="background:var(--info)"></div><div><div class="tl-t">Annual Allowance limits updated — S. Patel</div><div class="tl-s">Yesterday 16:40 · Pensions</div></div></div>
+      <div class="tl-i"><div class="tl-dot" style="background:var(--s)"></div><div><div class="tl-t">ISA Limits 2025/26 published ✓ · Arize monitoring on</div><div class="tl-s">Yesterday 14:20 · Wealth</div></div></div>
+      <div class="tl-i"><div class="tl-dot"></div><div><div class="tl-t">3 files ingested — SP: Pensions Ops Hub</div><div class="tl-s">Mon 09:00 · Scheduled sync</div></div></div>
+      <div class="tl-i"><div class="tl-dot" style="background:var(--s)"></div><div><div class="tl-t">Vulnerable Customer Handling v2.0 published ✓</div><div class="tl-s">Mon 11:30 · Pensions</div></div></div>
+    </div>
+    <div class="card">
+      <div class="ch"><span class="ct">Eval health by domain</span><button class="btn btn-g btn-sm" onclick="nav('evals')">Run evals</button></div>
+      <div style="margin-bottom:16px;">
+        <div style="font-size:11px;font-weight:700;margin-bottom:7px;color:var(--navy);text-transform:uppercase;letter-spacing:0.5px;">Pensions</div>
+        <div class="ev-row"><div class="ev-n">Accuracy</div><div class="ev-bw"><div class="pb"><div class="pf pf-w" style="width:81%"></div></div></div><div class="ev-pct" style="color:#d97706">81%</div></div>
+        <div class="ev-row"><div class="ev-n">Faithfulness</div><div class="ev-bw"><div class="pb"><div class="pf pf-n" style="width:96%"></div></div></div><div class="ev-pct">96%</div></div>
+        <div class="ev-row"><div class="ev-n">Hallucination (Arize)</div><div class="ev-bw"><div class="pb"><div class="pf pf-d" style="width:42%"></div></div></div><div class="ev-pct" style="color:var(--danger)">4.2%</div></div>
+      </div>
+      <div>
+        <div style="font-size:11px;font-weight:700;margin-bottom:7px;color:var(--navy);text-transform:uppercase;letter-spacing:0.5px;">Wealth</div>
+        <div class="ev-row"><div class="ev-n">Accuracy</div><div class="ev-bw"><div class="pb"><div class="pf pf-n" style="width:97%"></div></div></div><div class="ev-pct">97%</div></div>
+        <div class="ev-row"><div class="ev-n">Faithfulness</div><div class="ev-bw"><div class="pb"><div class="pf pf-n" style="width:95%"></div></div></div><div class="ev-pct">95%</div></div>
+        <div class="ev-row"><div class="ev-n">Hallucination (Arize)</div><div class="ev-bw"><div class="pb"><div class="pf pf-n" style="width:12%"></div></div></div><div class="ev-pct">1.2%</div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="ch"><span class="ct">Pending approvals</span><span class="bdg bdg-w">7 items</span></div>
+    <table class="tbl"><thead><tr><th>Knowledge file</th><th>Domain</th><th>Changed by</th><th>Submitted</th><th>Sensitivity</th><th>Action</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Drawdown Guidance — income limits</strong></td><td><span class="dom-t">Pensions</span></td><td>S. Patel</td><td>Today</td><td><span class="sens-r">Restricted</span></td><td><button class="btn btn-sm btn-p" onclick="showToast('Opened for review')">Review</button></td></tr>
+      <tr><td><strong>ISA subscription limits 2025/26</strong></td><td><span class="dom-t">Wealth</span></td><td>R. Khan</td><td>Yesterday</td><td><span class="sens-i">Internal</span></td><td><button class="btn btn-sm" onclick="showToast('Opened for review')">Review</button></td></tr>
+      <tr><td><strong>LTA abolition — adviser FAQ</strong></td><td><span class="dom-t">Pensions</span></td><td>M. Okafor</td><td>Mon</td><td><span class="sens-r">Restricted</span></td><td><button class="btn btn-sm" onclick="showToast('Opened for review')">Review</button></td></tr>
+    </tbody></table>
+  </div>
+</div>
+
+<!-- ═══ INGESTION ═══ -->
+<div class="page" id="page-ingestion">
+  <div class="ph"><h1>Ingestion</h1><p>Connect and sync knowledge sources into the platform</p>
+  <div class="ph-acts"><button class="btn btn-p" onclick="openM('m-src')"><i class="ti ti-plus"></i> Add source</button><button class="btn" onclick="showToast('Syncing all sources...')"><i class="ti ti-refresh"></i> Sync all</button></div></div>
+  <div class="g4">
+    <div class="sc-y"><div class="sc-l">Active sources</div><div class="sc-v">9</div></div>
+    <div class="sc"><div class="sc-l">Files ingested</div><div class="sc-v">847</div></div>
+    <div class="sc"><div class="sc-l">Pending review</div><div class="sc-v">3</div></div>
+    <div class="sc"><div class="sc-l">Last full sync</div><div class="sc-v" style="font-size:19px;">07:00</div></div>
+  </div>
+  <div class="g2">
+    <div>
+      <div class="ct" style="margin-bottom:11px;">Connected sources</div>
+      <div class="src"><div class="src-ic sp"><i class="ti ti-brand-sharepoint"></i></div><div style="flex:1;min-width:0;"><div style="font-weight:600;font-size:13px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">Pensions Ops Hub — SharePoint Modern</div><div style="font-size:11px;color:var(--mgray)">Today 07:00 · 312 pages · Nightly</div></div><span class="bdg bdg-s">Active</span></div>
+      <div class="src"><div class="src-ic sp"><i class="ti ti-brand-sharepoint"></i></div><div style="flex:1;min-width:0;"><div style="font-weight:600;font-size:13px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">Wealth Adviser Resources — SharePoint Classic</div><div style="font-size:11px;color:var(--mgray)">Yesterday · 189 pages · Nightly</div></div><span class="bdg bdg-s">Active</span></div>
+      <div class="src"><div class="src-ic pdf"><i class="ti ti-file-type-pdf"></i></div><div style="flex:1;"><div style="font-weight:600;font-size:13px;">FCA Consumer Duty Guidance — PDF</div><div style="font-size:11px;color:var(--mgray)">12 May · Manual</div></div><span class="bdg bdg-s">Ingested</span></div>
+      <div class="src"><div class="src-ic doc"><i class="ti ti-file-type-doc"></i></div><div style="flex:1;"><div style="font-weight:600;font-size:13px;">Drawdown Product Handbook v3.2 — Word</div><div style="font-size:11px;color:var(--mgray)">8 May · Manual</div></div><span class="bdg bdg-s">Ingested</span></div>
+      <div class="src" style="border-color:#d97706"><div class="src-ic pdf"><i class="ti ti-file-type-pdf"></i></div><div style="flex:1;"><div style="font-weight:600;font-size:13px;">Annual Allowance Technical Note 2025</div><div style="font-size:11px;color:var(--mgray)">Today · Processing</div></div><span class="bdg bdg-w">Processing</span></div>
+      <div class="src" style="border-color:#f09595"><div class="src-ic web"><i class="ti ti-world"></i></div><div style="flex:1;"><div style="font-weight:600;font-size:13px;">HMRC Pension Tax Relief — Gov.uk</div><div style="font-size:11px;color:var(--mgray)">Failed · Timeout</div></div><div style="display:flex;gap:7px;"><span class="bdg bdg-d">Error</span><button class="btn btn-g btn-sm" onclick="showToast('Retrying...')"><i class="ti ti-refresh"></i></button></div></div>
+    </div>
+    <div>
+      <div class="ct" style="margin-bottom:11px;">Manual upload</div>
+      <div class="card" style="text-align:center;padding:28px 18px;border-style:dashed;cursor:pointer;margin-bottom:12px;border-color:var(--navy);" onclick="showToast('File picker opened')">
+        <i class="ti ti-cloud-upload" style="font-size:34px;color:var(--navy);display:block;margin-bottom:9px;"></i>
+        <div style="font-weight:600;margin-bottom:3px;color:var(--navy);">Drag and drop files</div>
+        <div style="font-size:12px;color:var(--mgray);margin-bottom:12px;">PDF, Word (.docx), PowerPoint (.pptx)</div>
+        <button class="btn btn-y btn-sm" onclick="openM('m-upl')">Browse files</button>
+      </div>
+      <div class="ct" style="margin-bottom:9px;">Ingestion pipeline — live</div>
+      <div class="card card-sm">
+        <div class="ing-s done"><i class="ti ti-check"></i><span>Annual_Allowance_2025.pdf — 14 chunks</span></div>
+        <div class="ing-s done"><i class="ti ti-check"></i><span>Metadata: Pensions / Restricted</span></div>
+        <div class="ing-s done"><i class="ti ti-check"></i><span>Converted → AA_limits_2025.md</span></div>
+        <div class="ing-s active"><i class="ti ti-loader"></i><span>Running duplicate check...</span></div>
+        <div class="ing-s pend"><i class="ti ti-circle"></i><span>Await reviewer sign-off</span></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ KNOWLEDGE STORE ═══ -->
+<div class="page" id="page-knowledge">
+  <div class="ph"><h1>Knowledge store</h1><p>Canonical markdown files — single source of truth for agents and human pages</p>
+  <div class="ph-acts"><input type="text" class="fc" style="width:200px;" placeholder="Search..." oninput="filterK(this.value)"><select class="fc" style="width:130px;"><option>All domains</option><option>Pensions</option><option>Wealth</option></select><button class="btn btn-p" onclick="openM('m-nf')"><i class="ti ti-plus"></i> New file</button></div></div>
+  <div id="klist">
+    <div class="ki" onclick="nav('editor')"><div class="ki-ic"><i class="ti ti-file-text"></i></div><div class="ki-body"><div class="ki-t">Drawdown guidance — income limits and capped drawdown rules</div><div class="ki-m"><span class="dom-t">Pensions</span><span><i class="ti ti-clock" style="font-size:11px"></i> Today</span><span><i class="ti ti-git-branch" style="font-size:11px"></i> v1.4</span><span class="sens-r">Restricted</span><span class="bdg bdg-w" style="font-size:10px;">Eval flagged</span></div></div><div style="display:flex;gap:5px;flex-shrink:0;"><button class="btn btn-sm btn-p" onclick="event.stopPropagation();nav('editor')"><i class="ti ti-edit"></i> Edit</button><button class="btn btn-g btn-sm" onclick="event.stopPropagation();showToast('API endpoint copied')"><i class="ti ti-copy"></i></button></div></div>
+    <div class="ki"><div class="ki-ic"><i class="ti ti-file-text"></i></div><div class="ki-body"><div class="ki-t">Annual allowance limits 2025/26 — tapering and carry-forward rules</div><div class="ki-m"><span class="dom-t">Pensions</span><span><i class="ti ti-clock" style="font-size:11px"></i> Yesterday</span><span><i class="ti ti-git-branch" style="font-size:11px"></i> v2.1</span><span class="sens-r">Restricted</span><span class="bdg bdg-s" style="font-size:10px;">Eval passed</span></div></div><div style="display:flex;gap:5px;flex-shrink:0;"><button class="btn btn-sm" onclick="nav('editor')"><i class="ti ti-edit"></i> Edit</button><button class="btn btn-g btn-sm" onclick="showToast('Copied')"><i class="ti ti-copy"></i></button></div></div>
+    <div class="ki"><div class="ki-ic"><i class="ti ti-file-text"></i></div><div class="ki-body"><div class="ki-t">Vulnerable customer handling — pensions adviser guidance</div><div class="ki-m"><span class="dom-t">Pensions</span><span><i class="ti ti-clock" style="font-size:11px"></i> Mon</span><span><i class="ti ti-git-branch" style="font-size:11px"></i> v2.0</span><span class="sens-r">Restricted</span><span class="bdg bdg-s" style="font-size:10px;">Eval passed</span></div></div><div style="display:flex;gap:5px;flex-shrink:0;"><button class="btn btn-sm" onclick="nav('editor')"><i class="ti ti-edit"></i> Edit</button><button class="btn btn-g btn-sm" onclick="showToast('Copied')"><i class="ti ti-copy"></i></button></div></div>
+    <div class="ki"><div class="ki-ic"><i class="ti ti-file-text"></i></div><div class="ki-body"><div class="ki-t">ISA subscription limits and cash ISA rules 2025/26</div><div class="ki-m"><span class="dom-t">Wealth</span><span><i class="ti ti-clock" style="font-size:11px"></i> Yesterday</span><span><i class="ti ti-git-branch" style="font-size:11px"></i> v1.2</span><span class="sens-i">Internal</span><span class="bdg bdg-s" style="font-size:10px;">Eval passed</span></div></div><div style="display:flex;gap:5px;flex-shrink:0;"><button class="btn btn-sm" onclick="nav('editor')"><i class="ti ti-edit"></i> Edit</button><button class="btn btn-g btn-sm" onclick="showToast('Copied')"><i class="ti ti-copy"></i></button></div></div>
+    <div class="ki"><div class="ki-ic"><i class="ti ti-file-text"></i></div><div class="ki-body"><div class="ki-t">LTA abolition — adviser FAQ and transitional protections</div><div class="ki-m"><span class="dom-t">Pensions</span><span><i class="ti ti-clock" style="font-size:11px"></i> 2 days ago</span><span><i class="ti ti-git-branch" style="font-size:11px"></i> v3.0</span><span class="sens-r">Restricted</span><span class="bdg bdg-n" style="font-size:10px;">Pending review</span></div></div><div style="display:flex;gap:5px;flex-shrink:0;"><button class="btn btn-sm" onclick="nav('editor')"><i class="ti ti-edit"></i> Edit</button><button class="btn btn-g btn-sm" onclick="showToast('Copied')"><i class="ti ti-copy"></i></button></div></div>
+    <div class="ki"><div class="ki-ic"><i class="ti ti-file-text"></i></div><div class="ki-body"><div class="ki-t">Investment portfolio rebalancing — Wealth adviser process guide</div><div class="ki-m"><span class="dom-t">Wealth</span><span><i class="ti ti-clock" style="font-size:11px"></i> Last week</span><span><i class="ti ti-git-branch" style="font-size:11px"></i> v1.0</span><span class="sens-i">Internal</span><span class="bdg bdg-s" style="font-size:10px;">Eval passed</span></div></div><div style="display:flex;gap:5px;flex-shrink:0;"><button class="btn btn-sm" onclick="nav('editor')"><i class="ti ti-edit"></i> Edit</button><button class="btn btn-g btn-sm" onclick="showToast('Copied')"><i class="ti ti-copy"></i></button></div></div>
+  </div>
+</div>
+
+<!-- ═══ EDITOR ═══ -->
+<div class="page" id="page-editor">
+  <div class="ph"><h1>Editing: Drawdown guidance — income limits</h1><p>Pensions · v1.4 · <span style="color:#d97706;font-weight:600;">Eval flagged — accuracy 81% · Publish blocked</span></p>
+  <div class="ph-acts"><button class="btn btn-g btn-sm" onclick="showToast('History opened')"><i class="ti ti-git-branch"></i> v1.4 history</button><button class="btn" onclick="showToast('Saved as draft')"><i class="ti ti-device-floppy"></i> Save draft</button><button class="btn btn-p" onclick="openM('m-pub')"><i class="ti ti-send"></i> Submit for review</button></div></div>
+  <div class="notif w"><i class="ti ti-test-pipe"></i><div class="notif-b"><strong>Eval flagged (accuracy 81%):</strong> Golden dataset Q — "What GAD rate applies to capped drawdown 2025/26?" returned 2.75% but expected 3.25%. Review line 14. <span style="text-decoration:underline;cursor:pointer;" onclick="nav('evals')">Full eval →</span></div></div>
+  <div class="g2" style="align-items:start;">
+    <div>
+      <div class="card" style="padding:0;overflow:hidden;">
+        <div style="padding:10px 14px;border-bottom:1px solid var(--bd);background:var(--xgray);display:flex;align-items:center;gap:10px;"><span style="font-size:12px;font-weight:600;color:var(--mgray);">drawdown_guidance_income_limits.md</span><div style="flex:1"></div><span class="bdg bdg-n">Draft</span></div>
+        <div class="ed-tb"><button class="ed-btn"><strong>B</strong></button><button class="ed-btn"><em>I</em></button><button class="ed-btn">H1</button><button class="ed-btn">H2</button><button class="ed-btn"><i class="ti ti-list"></i></button><button class="ed-btn"><i class="ti ti-table"></i></button><button class="ed-btn"><i class="ti ti-info-circle"></i></button></div>
+        <div class="ed-content" contenteditable="true">
+          <h2 style="font-size:15px;font-weight:700;margin-bottom:7px;color:var(--navy);">Drawdown guidance — income limits</h2>
+          <p style="font-size:12px;color:var(--mgray);margin-bottom:11px;"><em>Owner: Pensions Operations · v1.4 · May 2025</em></p>
+          <h2 style="font-size:13px;font-weight:600;margin:12px 0 5px;color:var(--charcoal);">Overview</h2>
+          <p style="font-size:13px;line-height:1.7;margin-bottom:9px;color:var(--charcoal);">Drawdown allows customers to take flexible income directly from their pension fund while remaining invested. Income limits depend on whether the customer is in flexi-access drawdown or capped drawdown (pre-April 2015 arrangements only).</p>
+          <h2 style="font-size:13px;font-weight:600;margin:12px 0 5px;color:var(--charcoal);">Flexi-access drawdown</h2>
+          <p style="font-size:13px;line-height:1.7;margin-bottom:9px;color:var(--charcoal);">There is no maximum income limit under flexi-access drawdown. Customers may withdraw any amount at any time, subject to their fund value.</p>
+          <h2 style="font-size:13px;font-weight:600;margin:12px 0 5px;color:var(--charcoal);">Capped drawdown — 2025/26 GAD rate update</h2>
+          <p style="font-size:13px;line-height:1.7;background:var(--wl);padding:8px 12px;border-radius:5px;border-left:3px solid #d97706;color:var(--charcoal);">⚠️ <strong>Edit in progress:</strong> GAD rate updated 2.75% → 3.25% effective 6 April 2025. Maximum income = 150% of GAD annuity rate × fund value.</p>
+        </div>
+      </div>
+      <div class="card card-sm" style="margin-top:11px;">
+        <div style="font-size:11px;font-weight:700;margin-bottom:8px;color:var(--mgray);text-transform:uppercase;letter-spacing:0.4px;">Frontmatter metadata</div>
+        <div class="g2" style="gap:9px;">
+          <div class="fg" style="margin-bottom:0;"><label class="fl">Domain</label><select class="fc"><option>Pensions</option><option>Wealth</option></select></div>
+          <div class="fg" style="margin-bottom:0;"><label class="fl">Sensitivity</label><select class="fc"><option>Restricted</option><option>Internal</option><option>Highly restricted</option></select></div>
+          <div class="fg" style="margin-bottom:0;"><label class="fl">Owner</label><input class="fc" value="Pensions Operations"></div>
+          <div class="fg" style="margin-bottom:0;"><label class="fl">Review cycle</label><select class="fc"><option>Quarterly</option><option>Annually</option></select></div>
+        </div>
+      </div>
+    </div>
+    <div>
+      <div class="card card-sm" style="margin-bottom:11px;">
+        <div style="font-size:11px;font-weight:700;margin-bottom:8px;color:var(--mgray);text-transform:uppercase;">Version history</div>
+        <div style="font-size:12px;">
+          <div style="display:flex;justify-content:space-between;padding:5px 0;border-bottom:1px solid var(--lgray);"><span><strong>v1.4</strong> — Current draft</span><span style="color:var(--mgray)">Today</span></div>
+          <div style="display:flex;justify-content:space-between;padding:5px 0;border-bottom:1px solid var(--lgray);"><span>v1.3 — GAD tables refreshed</span><span style="color:var(--mgray)">14 May</span></div>
+          <div style="display:flex;justify-content:space-between;padding:5px 0;"><span>v1.2 — Flexi section expanded</span><span style="color:var(--mgray)">2 Apr</span></div>
+        </div>
+        <button class="btn btn-g btn-sm" style="margin-top:7px;width:100%;" onclick="showToast('Rolled back to v1.3')">Rollback to v1.3</button>
+      </div>
+      <div class="card card-sm" style="margin-bottom:11px;">
+        <div style="font-size:11px;font-weight:700;margin-bottom:8px;color:var(--mgray);text-transform:uppercase;">Linked agents</div>
+        <div style="display:flex;align-items:center;gap:8px;padding:7px 0;border-bottom:1px solid var(--lgray);"><div style="width:26px;height:26px;background:var(--teal-l);border-radius:5px;display:flex;align-items:center;justify-content:center;"><i class="ti ti-robot" style="font-size:14px;color:var(--teal);"></i></div><div style="flex:1;"><div style="font-size:12px;font-weight:600;">Pensions Guidance Agent</div><div style="font-size:11px;color:var(--mgray)">Customer-facing</div></div><span class="bdg bdg-s" style="font-size:10px;">Active</span></div>
+        <div style="display:flex;align-items:center;gap:8px;padding:7px 0;"><div style="width:26px;height:26px;background:var(--teal-l);border-radius:5px;display:flex;align-items:center;justify-content:center;"><i class="ti ti-robot" style="font-size:14px;color:var(--teal);"></i></div><div style="flex:1;"><div style="font-size:12px;font-weight:600;">Ops Handler Support</div><div style="font-size:11px;color:var(--mgray)">Internal</div></div><span class="bdg bdg-s" style="font-size:10px;">Active</span></div>
+        <div class="notif w" style="margin-top:9px;margin-bottom:0;padding:7px 10px;"><i class="ti ti-alert-triangle" style="font-size:13px;"></i><div class="notif-b" style="font-size:11px;">Publishing updates both agents. Evals must pass first.</div></div>
+      </div>
+      <!-- ARIZE PANEL IN EDITOR -->
+      <div style="border-radius:var(--r);overflow:hidden;">
+        <div class="arize-hdr"><svg width="14" height="14" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" fill="#fff" fill-opacity="0.2"/><path d="M8 16l4-8 4 8M9.5 13h5" stroke="white" stroke-width="2" stroke-linecap="round"/></svg><span class="arize-logo">Arize AX</span><span class="arize-sub">Live trace</span></div>
+        <div class="arize-body">
+          <div class="am"><span>Accuracy score</span><span class="am-v" style="color:#d97706;">81% ↓9pp</span></div>
+          <div class="am"><span>Faithfulness</span><span class="am-v">96%</span></div>
+          <div class="am"><span>Hallucination rate</span><span class="am-v" style="color:var(--danger);">4.2%</span></div>
+          <div class="am"><span>Guardrail triggers</span><span class="am-v" style="color:#d97706;">2</span></div>
+          <div class="a-trace">Trace: <code>ekp-2025-0530-d14</code><button class="btn btn-arize btn-sm" style="margin-top:7px;width:100%;" onclick="nav('arize')"><i class="ti ti-external-link"></i> Open in Arize AX</button></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ PAGES ═══ -->
+<div class="page" id="page-pages">
+  <div class="ph"><h1>Published pages</h1><p>Human-readable guides rendered from markdown</p>
+  <div class="ph-acts"><button class="btn btn-p" onclick="openM('m-np')"><i class="ti ti-plus"></i> New guide</button></div></div>
+  <div class="g3" style="margin-bottom:18px;">
+    <div class="card" style="border-top:4px solid var(--navy);">
+      <div style="display:flex;align-items:center;gap:9px;margin-bottom:9px;"><i class="ti ti-chart-bar" style="font-size:20px;color:var(--navy);"></i><div><div style="font-weight:700;font-size:13px;color:var(--navy);">Pensions operations guide</div><div style="font-size:11px;color:var(--mgray)">28 pages · 14 files</div></div></div>
+      <div style="font-size:12px;color:var(--mgray);margin-bottom:11px;">Drawdown, AA limits, LTA, vulnerable customers, MPAA</div>
+      <button class="btn btn-sm" style="width:100%;" onclick="openM('m-vp')"><i class="ti ti-eye"></i> Preview guide</button>
+    </div>
+    <div class="card" style="border-top:4px solid var(--yellow);">
+      <div style="display:flex;align-items:center;gap:9px;margin-bottom:9px;"><i class="ti ti-building-bank" style="font-size:20px;color:var(--teal);"></i><div><div style="font-weight:700;font-size:13px;color:var(--charcoal);">Wealth adviser handbook</div><div style="font-size:11px;color:var(--mgray)">19 pages · 8 files</div></div></div>
+      <div style="font-size:12px;color:var(--mgray);margin-bottom:11px;">ISA limits, rebalancing, portfolio construction, suitability</div>
+      <button class="btn btn-sm" style="width:100%;" onclick="showToast('Opening Wealth guide...')"><i class="ti ti-eye"></i> Preview guide</button>
+    </div>
+    <div class="card" style="border-top:4px solid var(--lgray);border-style:solid;">
+      <div style="display:flex;align-items:center;gap:9px;margin-bottom:9px;"><i class="ti ti-plus" style="font-size:20px;color:var(--mgray);"></i><div><div style="font-weight:700;font-size:13px;color:var(--mgray);">New guide</div><div style="font-size:11px;color:var(--mgray)">SOP, training, FAQ…</div></div></div>
+      <div style="font-size:12px;color:var(--mgray);margin-bottom:11px;">Create a guide from existing knowledge files</div>
+      <button class="btn btn-y btn-sm" style="width:100%;" onclick="openM('m-np')">Create guide</button>
+    </div>
+  </div>
+  <div class="card">
+    <div class="ch"><span class="ct">All published pages</span></div>
+    <table class="tbl"><thead><tr><th>Page title</th><th>Guide</th><th>Domain</th><th>Version</th><th>Updated</th><th>Status</th><th></th></tr></thead>
+    <tbody>
+      <tr><td><strong>Understanding capped drawdown</strong></td><td>Pensions ops guide</td><td><span class="dom-t" style="font-size:10px;">Pensions</span></td><td>v1.3</td><td>14 May</td><td><span class="bdg bdg-s">Live</span></td><td><button class="btn btn-g btn-sm" onclick="openM('m-vp')"><i class="ti ti-eye"></i></button></td></tr>
+      <tr><td><strong>Annual allowance — adviser guide</strong></td><td>Pensions ops guide</td><td><span class="dom-t" style="font-size:10px;">Pensions</span></td><td>v2.1</td><td>Yesterday</td><td><span class="bdg bdg-s">Live</span></td><td><button class="btn btn-g btn-sm" onclick="showToast('Previewing...')"><i class="ti ti-eye"></i></button></td></tr>
+      <tr><td><strong>ISA limits 2025/26</strong></td><td>Wealth adviser handbook</td><td><span class="dom-t" style="font-size:10px;">Wealth</span></td><td>v1.2</td><td>Yesterday</td><td><span class="bdg bdg-s">Live</span></td><td><button class="btn btn-g btn-sm" onclick="showToast('Previewing...')"><i class="ti ti-eye"></i></button></td></tr>
+      <tr><td><strong>Drawdown guidance — income limits</strong></td><td>Pensions ops guide</td><td><span class="dom-t" style="font-size:10px;">Pensions</span></td><td>v1.4</td><td>Today</td><td><span class="bdg bdg-w">Eval pending</span></td><td><button class="btn btn-g btn-sm" onclick="nav('evals')"><i class="ti ti-test-pipe"></i></button></td></tr>
+    </tbody></table>
+  </div>
+</div>
+
+<!-- ═══ EVALS ═══ -->
+<div class="page" id="page-evals">
+  <div class="ph"><h1>Evaluations</h1><p>Quality gates — all knowledge changes tested before publication · Results pushed to Arize AX</p>
+  <div class="ph-acts"><button class="btn btn-p" onclick="runEval()"><i class="ti ti-player-play"></i> Run eval suite</button><button class="btn btn-arize" onclick="nav('arize')"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" style="flex-shrink:0"><circle cx="12" cy="12" r="10" fill="#fff" fill-opacity="0.2"/><path d="M8 16l4-8 4 8M9.5 13h5" stroke="white" stroke-width="2" stroke-linecap="round"/></svg> Arize AX</button></div></div>
+  <div class="notif w"><i class="ti ti-alert-triangle"></i><div class="notif-b"><strong>Publish gate blocked:</strong> Drawdown Guidance v1.4 — accuracy 81% vs threshold 90%. <span style="text-decoration:underline;cursor:pointer;" onclick="nav('arize')">View Arize trace →</span></div></div>
+  <div class="g4">
+    <div class="sc-y"><div class="sc-l">Evals run today</div><div class="sc-v">24</div></div>
+    <div class="sc"><div class="sc-l">Pass rate</div><div class="sc-v">94%</div><div class="sc-d dn">↓ 2%</div></div>
+    <div class="sc"><div class="sc-l">Publish gates active</div><div class="sc-v">1</div></div>
+    <div class="sc"><div class="sc-l">Golden Q&amp;As</div><div class="sc-v">312</div></div>
+  </div>
+  <div class="g2">
+    <div class="card">
+      <div class="ch"><span class="ct">Drawdown guidance v1.4 — latest run</span><span class="bdg bdg-d">Failed</span></div>
+      <div style="display:flex;gap:18px;margin-bottom:14px;">
+        <div class="ev-ring"><div class="ev-score w">81%</div><div class="ev-lbl">Accuracy</div></div>
+        <div class="ev-ring"><div class="ev-score p">96%</div><div class="ev-lbl">Faithfulness</div></div>
+        <div class="ev-ring"><div class="ev-score p">91%</div><div class="ev-lbl">Coverage</div></div>
+        <div class="ev-ring"><div class="ev-score f">4.2%</div><div class="ev-lbl">Hallucination</div></div>
+      </div>
+      <div style="font-size:11px;font-weight:700;margin-bottom:7px;color:var(--mgray);text-transform:uppercase;letter-spacing:0.4px;">Failing questions</div>
+      <div style="background:var(--dl);border-radius:var(--r);padding:9px 11px;margin-bottom:7px;font-size:12px;"><div style="font-weight:600;color:var(--danger);margin-bottom:2px;">Q: What GAD rate applies to capped drawdown 2025/26?</div><div style="color:var(--mgray)">Expected: <strong>3.25%</strong> · Got: <strong>2.75%</strong> · Source conflict v1.3 vs v1.4</div></div>
+      <div style="background:var(--dl);border-radius:var(--r);padding:9px 11px;font-size:12px;"><div style="font-weight:600;color:var(--danger);margin-bottom:2px;">Q: Is there a max income for flexi-access drawdown?</div><div style="color:var(--mgray)">Expected: No limit · Got: Ambiguous</div></div>
+      <div style="display:flex;gap:7px;margin-top:11px;">
+        <button class="btn btn-sm btn-p" onclick="runEval()"><i class="ti ti-refresh"></i> Re-run after edit</button>
+        <button class="btn btn-sm" onclick="nav('editor')"><i class="ti ti-edit"></i> Fix in editor</button>
+        <button class="btn btn-sm btn-arize" onclick="nav('arize')"><i class="ti ti-external-link"></i> Arize</button>
+      </div>
+    </div>
+    <div>
+      <div class="card" style="margin-bottom:12px;">
+        <div class="ch"><span class="ct">Recent runs</span></div>
+        <table class="tbl"><thead><tr><th>File</th><th>Accuracy</th><th>Hallucination</th><th>Status</th></tr></thead>
+        <tbody>
+          <tr><td>Drawdown v1.4</td><td style="color:#d97706;font-weight:600;">81%</td><td style="color:var(--danger);font-weight:600;">4.2%</td><td><span class="bdg bdg-d">Blocked</span></td></tr>
+          <tr><td>AA limits v2.1</td><td>98%</td><td>0.8%</td><td><span class="bdg bdg-s">Passed</span></td></tr>
+          <tr><td>Vulnerable customer v2.0</td><td>97%</td><td>1.1%</td><td><span class="bdg bdg-s">Passed</span></td></tr>
+          <tr><td>ISA limits v1.2</td><td>99%</td><td>0.4%</td><td><span class="bdg bdg-s">Passed</span></td></tr>
+        </tbody></table>
+      </div>
+      <div style="border-radius:var(--r);overflow:hidden;">
+        <div class="arize-hdr"><svg width="13" height="13" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" fill="#fff" fill-opacity="0.2"/><path d="M8 16l4-8 4 8M9.5 13h5" stroke="white" stroke-width="2" stroke-linecap="round"/></svg><span class="arize-logo">Arize AX · Experiment push</span></div>
+        <div class="arize-body">
+          <div class="am"><span>Experiment</span><span class="am-v" style="font-size:11px;">drawdown-v1.4-eval</span></div>
+          <div class="am"><span>Eval template</span><span class="am-v" style="font-size:11px;">LLM-as-Judge · Pensions</span></div>
+          <div class="am"><span>Pushed</span><span class="am-v" style="font-size:11px;">Today 07:12</span></div>
+          <div class="a-trace">Trace: <code>ekp-2025-0530-d14</code><button class="btn btn-arize btn-sm" style="margin-top:7px;width:100%;" onclick="nav('arize')"><i class="ti ti-external-link"></i> Open in Arize AX</button></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="ch"><span class="ct">Golden dataset — Pensions domain</span><button class="btn btn-sm btn-y" onclick="openM('m-qa')"><i class="ti ti-plus"></i> Add Q&amp;A</button></div>
+    <table class="tbl"><thead><tr><th>Question</th><th>Expected answer</th><th>Last result</th><th>Added by</th></tr></thead>
+    <tbody>
+      <tr><td>What is the 2025/26 pension annual allowance?</td><td>£60,000</td><td><span class="bdg bdg-s">Pass</span></td><td>S. Patel</td></tr>
+      <tr><td>When does the MPAA apply?</td><td>After first flexi-access income withdrawal</td><td><span class="bdg bdg-s">Pass</span></td><td>J. Thomson</td></tr>
+      <tr><td>What GAD rate applies to capped drawdown 2025/26?</td><td>3.25%</td><td><span class="bdg bdg-d">Fail</span></td><td>M. Okafor</td></tr>
+      <tr><td>Is there a max income for flexi-access drawdown?</td><td>No maximum income limit</td><td><span class="bdg bdg-d">Fail</span></td><td>S. Patel</td></tr>
+      <tr><td>What are the FCA vulnerable customer indicators?</td><td>Health, life events, resilience, capability</td><td><span class="bdg bdg-s">Pass</span></td><td>R. Khan</td></tr>
+    </tbody></table>
+  </div>
+</div>
+
+<!-- ═══ ARIZE AX ═══ -->
+<div class="page" id="page-arize">
+  <div class="ph"><h1>Arize AX — Observability &amp; Evaluation</h1><p>LLM tracing · Experiments · Guardrails · Monitor · Annotations · Connected to Aviva IWR agents</p>
+  <div class="ph-acts"><button class="btn btn-arize" onclick="showToast('Opening Arize AX platform...')"><i class="ti ti-external-link"></i> Open Arize AX</button><button class="btn" onclick="showToast('Refreshing traces...')"><i class="ti ti-refresh"></i> Refresh</button></div></div>
+  <div class="notif arize"><i class="ti ti-activity"></i><div class="notif-b"><strong>Arize AX alert — Pensions Guidance Agent:</strong> Hallucination rate 4.2% (baseline 1.8%). Correlated with Drawdown Guidance v1.4 edit at 06:48. Guardrail tripped ×2. Recommended: fix knowledge source, re-run evals.</div></div>
+  <div class="g4">
+    <div class="sc-y"><div class="sc-l">Traces today</div><div class="sc-v">1,847</div></div>
+    <div class="sc"><div class="sc-l">Hallucination rate</div><div class="sc-v" style="color:var(--danger)">4.2%</div><div class="sc-d dn">↑ from 1.8%</div></div>
+    <div class="sc"><div class="sc-l">Guardrail triggers</div><div class="sc-v">2</div><div class="sc-d dn">Last 24h</div></div>
+    <div class="sc"><div class="sc-l">Experiments run</div><div class="sc-v">12</div><div class="sc-d n">This week</div></div>
+  </div>
+  <div class="g2">
+    <div>
+      <!-- TRACING -->
+      <div style="border-radius:var(--r);overflow:hidden;margin-bottom:13px;">
+        <div class="arize-hdr"><svg width="13" height="13" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" fill="#fff" fill-opacity="0.2"/><path d="M8 16l4-8 4 8M9.5 13h5" stroke="white" stroke-width="2" stroke-linecap="round"/></svg><span class="arize-logo">Tracing — Pensions Guidance Agent</span><span class="arize-sub">Live</span></div>
+        <div class="arize-body">
+          <div style="font-size:11px;font-weight:700;margin-bottom:8px;color:var(--arize);text-transform:uppercase;letter-spacing:0.5px;">Trace ekp-2025-0530-d14</div>
+          <div class="a-span"><div style="width:58px;font-weight:600;font-size:11px;">retrieval</div><div style="flex:1;"><div class="a-span-bar" style="width:85%"></div></div><div style="font-size:10px;color:var(--mgray);width:34px;text-align:right;">142ms</div><span class="a-tag">OK</span></div>
+          <div class="a-span"><div style="width:58px;font-weight:600;font-size:11px;">llm_call</div><div style="flex:1;"><div class="a-span-bar" style="width:100%"></div></div><div style="font-size:10px;color:var(--mgray);width:34px;text-align:right;">1.8s</div><span class="a-tag" style="background:rgba(163,45,45,0.1);color:var(--danger)">HALLUC</span></div>
+          <div class="a-span"><div style="width:58px;font-weight:600;font-size:11px;">guardrail</div><div style="flex:1;"><div class="a-span-bar" style="width:20%;background:#d97706;"></div></div><div style="font-size:10px;color:var(--mgray);width:34px;text-align:right;">38ms</div><span class="a-tag" style="background:var(--wl);color:var(--w)">TRIP</span></div>
+          <div class="a-span"><div style="width:58px;font-weight:600;font-size:11px;">output</div><div style="flex:1;"><div class="a-span-bar" style="width:12%"></div></div><div style="font-size:10px;color:var(--mgray);width:34px;text-align:right;">22ms</div><span class="a-tag">OK</span></div>
+          <div style="background:var(--white);border:1px solid rgba(108,71,255,0.12);border-radius:var(--r);padding:9px;margin-top:9px;font-size:11px;">
+            <div style="font-weight:600;color:var(--charcoal);margin-bottom:3px;">Input query</div>
+            <div style="font-style:italic;color:var(--mgray);">"What is the maximum income from capped drawdown this year?"</div>
+            <div style="font-weight:600;color:var(--charcoal);margin:7px 0 3px;">Agent output (guardrail tripped)</div>
+            <div style="font-style:italic;color:var(--danger);">"Based on the GAD rate of 2.75%..." [incorrect — should be 3.25%]</div>
+            <div style="font-weight:600;color:var(--charcoal);margin:7px 0 3px;">Root cause</div>
+            <div style="color:var(--mgray);">Knowledge conflict: v1.3 vs v1.4 of drawdown_guidance_income_limits.md</div>
+          </div>
+        </div>
+      </div>
+      <!-- GUARDRAILS -->
+      <div style="border-radius:var(--r);overflow:hidden;">
+        <div class="arize-hdr"><svg width="13" height="13" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" fill="#fff" fill-opacity="0.2"/><path d="M8 16l4-8 4 8M9.5 13h5" stroke="white" stroke-width="2" stroke-linecap="round"/></svg><span class="arize-logo">Guardrails — Pensions Agent</span></div>
+        <div class="arize-body">
+          <div class="gr-row"><div style="display:flex;align-items:center;gap:7px;"><div class="gr-dot" style="background:#22c55e;"></div>Hallucination detection</div><span class="bdg bdg-s" style="font-size:10px;">Active</span></div>
+          <div class="gr-row"><div style="display:flex;align-items:center;gap:7px;"><div class="gr-dot" style="background:#22c55e;"></div>PII leakage prevention</div><span class="bdg bdg-s" style="font-size:10px;">Active</span></div>
+          <div class="gr-row"><div style="display:flex;align-items:center;gap:7px;"><div class="gr-dot" style="background:#d97706;"></div>Regulatory accuracy gate</div><span class="bdg bdg-w" style="font-size:10px;">Tripped ×2</span></div>
+          <div class="gr-row"><div style="display:flex;align-items:center;gap:7px;"><div class="gr-dot" style="background:#22c55e;"></div>Scope restriction (Pensions)</div><span class="bdg bdg-s" style="font-size:10px;">Active</span></div>
+          <div class="gr-row" style="border:none;"><div style="display:flex;align-items:center;gap:7px;"><div class="gr-dot" style="background:#22c55e;"></div>Prompt injection protection</div><span class="bdg bdg-s" style="font-size:10px;">Active</span></div>
+        </div>
+      </div>
+    </div>
+    <div>
+      <!-- EXPERIMENTS -->
+      <div style="border-radius:var(--r);overflow:hidden;margin-bottom:13px;">
+        <div class="arize-hdr"><svg width="13" height="13" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" fill="#fff" fill-opacity="0.2"/><path d="M8 16l4-8 4 8M9.5 13h5" stroke="white" stroke-width="2" stroke-linecap="round"/></svg><span class="arize-logo">Experiments &amp; Datasets</span></div>
+        <div class="arize-body">
+          <table style="width:100%;font-size:11px;border-collapse:collapse;">
+            <tr style="border-bottom:1px solid rgba(108,71,255,0.1);"><th style="text-align:left;padding:5px 0;color:var(--mgray);font-weight:600;">Experiment</th><th style="text-align:right;padding:5px 0;color:var(--mgray);font-weight:600;">Accuracy</th><th style="text-align:right;padding:5px 0;color:var(--mgray);font-weight:600;">Status</th></tr>
+            <tr style="border-bottom:1px solid rgba(108,71,255,0.08);"><td style="padding:5px 0;">drawdown-v1.4-eval</td><td style="text-align:right;color:#d97706;font-weight:700;">81%</td><td style="text-align:right;"><span class="bdg bdg-d" style="font-size:10px;">Failed</span></td></tr>
+            <tr style="border-bottom:1px solid rgba(108,71,255,0.08);"><td style="padding:5px 0;">aa-limits-v2.1-eval</td><td style="text-align:right;color:var(--arize);font-weight:700;">98%</td><td style="text-align:right;"><span class="bdg bdg-s" style="font-size:10px;">Passed</span></td></tr>
+            <tr style="border-bottom:1px solid rgba(108,71,255,0.08);"><td style="padding:5px 0;">vc-handling-v2.0-eval</td><td style="text-align:right;color:var(--arize);font-weight:700;">97%</td><td style="text-align:right;"><span class="bdg bdg-s" style="font-size:10px;">Passed</span></td></tr>
+            <tr><td style="padding:5px 0;">isa-limits-v1.2-eval</td><td style="text-align:right;color:var(--arize);font-weight:700;">99%</td><td style="text-align:right;"><span class="bdg bdg-s" style="font-size:10px;">Passed</span></td></tr>
+          </table>
+          <div style="margin-top:10px;padding-top:10px;border-top:1px solid rgba(108,71,255,0.1);font-size:11px;">
+            <div style="font-weight:700;margin-bottom:5px;color:var(--arize);">LLM-as-Judge · Eval template</div>
+            <div style="color:var(--mgray);">Template: <code style="background:rgba(108,71,255,0.08);color:var(--arize);padding:1px 5px;border-radius:3px;">pensions-faithfulness-v2</code></div>
+            <div style="color:var(--mgray);margin-top:3px;">Judge: GPT-4o · Criteria: accuracy, faithfulness, regulatory compliance, no hallucination</div>
+          </div>
+        </div>
+      </div>
+      <!-- MONITOR -->
+      <div style="border-radius:var(--r);overflow:hidden;margin-bottom:13px;">
+        <div class="arize-hdr"><svg width="13" height="13" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" fill="#fff" fill-opacity="0.2"/><path d="M8 16l4-8 4 8M9.5 13h5" stroke="white" stroke-width="2" stroke-linecap="round"/></svg><span class="arize-logo">Monitor — Production</span></div>
+        <div class="arize-body">
+          <div class="mon-card"><div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px;"><span style="font-size:12px;font-weight:600;">Hallucination — Pensions Agent</span><span class="bdg bdg-d" style="font-size:10px;">Alert firing</span></div><div style="font-size:11px;color:var(--mgray);margin-bottom:5px;">Current: 4.2% · Threshold: 2.5%</div><div class="pb"><div class="pf pf-d" style="width:42%"></div></div></div>
+          <div class="mon-card"><div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px;"><span style="font-size:12px;font-weight:600;">Latency p95 — Pensions Agent</span><span class="bdg bdg-s" style="font-size:10px;">Normal</span></div><div style="font-size:11px;color:var(--mgray);margin-bottom:5px;">1.84s · Threshold: 3.0s</div><div class="pb"><div class="pf pf-n" style="width:62%"></div></div></div>
+          <div class="mon-card"><div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px;"><span style="font-size:12px;font-weight:600;">Faithfulness — Wealth Agent</span><span class="bdg bdg-s" style="font-size:10px;">Normal</span></div><div style="font-size:11px;color:var(--mgray);margin-bottom:5px;">95% · Threshold: 90%</div><div class="pb"><div class="pf pf-n" style="width:95%"></div></div></div>
+        </div>
+      </div>
+      <!-- ANNOTATIONS -->
+      <div style="border-radius:var(--r);overflow:hidden;">
+        <div class="arize-hdr"><svg width="13" height="13" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" fill="#fff" fill-opacity="0.2"/><path d="M8 16l4-8 4 8M9.5 13h5" stroke="white" stroke-width="2" stroke-linecap="round"/></svg><span class="arize-logo">Annotations — review queue</span></div>
+        <div class="arize-body">
+          <div style="background:var(--white);border:1px solid rgba(108,71,255,0.12);border-radius:var(--r);padding:9px;margin-bottom:7px;font-size:11px;">
+            <div style="display:flex;justify-content:space-between;margin-bottom:4px;"><span style="font-weight:600;">Trace ekp-0530-d14</span><span class="bdg bdg-d" style="font-size:10px;">Needs correction</span></div>
+            <div style="color:var(--mgray)">Query: capped drawdown GAD rate · Output: incorrect rate cited · Fix: update knowledge source</div>
+            <button class="btn btn-sm" style="margin-top:6px;width:100%;" onclick="nav('editor')"><i class="ti ti-edit"></i> Fix knowledge source</button>
+          </div>
+          <div style="background:var(--white);border:1px solid rgba(108,71,255,0.12);border-radius:var(--r);padding:9px;font-size:11px;">
+            <div style="display:flex;justify-content:space-between;margin-bottom:4px;"><span style="font-weight:600;">Trace ekp-0529-c08</span><span class="bdg bdg-w" style="font-size:10px;">Under review</span></div>
+            <div style="color:var(--mgray)">Query: MPAA and carry-forward · Output: partially correct · Annotator: S. Patel</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- GOVERNANCE -->
+<div class="page" id="page-governance">
+  <div class="ph"><h1>Access &amp; RBAC</h1><p>Role-based access control · Entra ID SSO · Pensions and Wealth domains</p>
+  <div class="ph-acts"><button class="btn btn-p" onclick="openM('m-user')"><i class="ti ti-user-plus"></i> Add user</button></div></div>
+  <div class="g4">
+    <div class="sc-y"><div class="sc-l">Total users</div><div class="sc-v">34</div></div>
+    <div class="sc"><div class="sc-l">Editors</div><div class="sc-v">9</div></div>
+    <div class="sc"><div class="sc-l">Domain owners</div><div class="sc-v">4</div></div>
+    <div class="sc"><div class="sc-l">Auditors</div><div class="sc-v">3</div></div>
+  </div>
+  <div class="g2">
+    <div class="card">
+      <div class="ch"><span class="ct">Users and roles</span></div>
+      <table class="tbl"><thead><tr><th>User</th><th>Role</th><th>Domains</th><th>Last active</th></tr></thead>
+      <tbody>
+        <tr><td><div style="display:flex;align-items:center;gap:7px;"><div class="av8" style="background:var(--navy);color:var(--yellow);">JT</div>Jack Thomson</div></td><td><span class="bdg bdg-nv">Platform admin</span></td><td>All</td><td>Now</td></tr>
+        <tr><td><div style="display:flex;align-items:center;gap:7px;"><div class="av8" style="background:var(--teal);color:var(--white);">SP</div>Simran Patel</div></td><td><span class="bdg bdg-t">Domain owner</span></td><td>Pensions</td><td>Today</td></tr>
+        <tr><td><div style="display:flex;align-items:center;gap:7px;"><div class="av8" style="background:var(--teal);color:var(--white);">RK</div>Reza Khan</div></td><td><span class="bdg bdg-t">Domain owner</span></td><td>Wealth</td><td>Yesterday</td></tr>
+        <tr><td><div style="display:flex;align-items:center;gap:7px;"><div class="av8" style="background:var(--info);color:#fff;">MO</div>Mia Okafor</div></td><td><span class="bdg bdg-i">Editor</span></td><td>Pensions</td><td>2h ago</td></tr>
+        <tr><td><div style="display:flex;align-items:center;gap:7px;"><div class="av8" style="background:var(--info);color:#fff;">DL</div>David Lee</div></td><td><span class="bdg bdg-i">Editor</span></td><td>Wealth</td><td>Mon</td></tr>
+        <tr><td><div style="display:flex;align-items:center;gap:7px;"><div class="av8" style="background:var(--mgray);color:#fff;">AB</div>Audit Bot</div></td><td><span class="bdg bdg-n">Auditor</span></td><td>Read-only · All</td><td>07:00</td></tr>
+      </tbody></table>
+    </div>
+    <div>
+      <div class="card card-sm" style="margin-bottom:12px;">
+        <div class="ct" style="margin-bottom:11px;">Role permissions</div>
+        <table class="tbl" style="font-size:11px;"><thead><tr><th>Permission</th><th style="text-align:center">Viewer</th><th style="text-align:center">Editor</th><th style="text-align:center">D. Owner</th><th style="text-align:center">Admin</th></tr></thead>
+        <tbody>
+          <tr><td>Read knowledge</td><td style="text-align:center">✓</td><td style="text-align:center">✓</td><td style="text-align:center">✓</td><td style="text-align:center">✓</td></tr>
+          <tr><td>Edit knowledge</td><td style="text-align:center">—</td><td style="text-align:center">✓</td><td style="text-align:center">✓</td><td style="text-align:center">✓</td></tr>
+          <tr><td>Approve / publish</td><td style="text-align:center">—</td><td style="text-align:center">—</td><td style="text-align:center">✓</td><td style="text-align:center">✓</td></tr>
+          <tr><td>View Arize traces</td><td style="text-align:center">—</td><td style="text-align:center">—</td><td style="text-align:center">✓</td><td style="text-align:center">✓</td></tr>
+          <tr><td>Manage users</td><td style="text-align:center">—</td><td style="text-align:center">—</td><td style="text-align:center">—</td><td style="text-align:center">✓</td></tr>
+          <tr><td>Rollback version</td><td style="text-align:center">—</td><td style="text-align:center">—</td><td style="text-align:center">✓</td><td style="text-align:center">✓</td></tr>
+        </tbody></table>
+      </div>
+      <div class="card card-sm">
+        <div class="ct" style="margin-bottom:10px;">Sensitivity access tiers</div>
+        <div style="font-size:12px;">
+          <div style="display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid var(--lgray);"><span>Internal</span><span style="color:var(--mgray);">All authenticated users</span></div>
+          <div style="display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid var(--lgray);"><span>Restricted</span><span style="color:var(--mgray);">Editors + Domain owners</span></div>
+          <div style="display:flex;justify-content:space-between;padding:6px 0;"><span>Highly restricted</span><span style="color:var(--mgray);">Domain owners + logged access</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- AUDIT LOG -->
+<div class="page" id="page-audit">
+  <div class="ph"><h1>Audit log</h1><p>Immutable record of all platform activity · 7-year retention · Exportable</p>
+  <div class="ph-acts"><button class="btn" onclick="showToast('Exporting CSV...')"><i class="ti ti-download"></i> Export CSV</button><button class="btn" onclick="showToast('Exporting JSON...')"><i class="ti ti-download"></i> Export JSON</button></div></div>
+  <div class="card card-sm" style="margin-bottom:13px;"><div style="display:flex;gap:9px;flex-wrap:wrap;"><input type="text" class="fc" placeholder="Search log..." style="flex:1;min-width:150px;"><select class="fc" style="width:140px;"><option>All actions</option><option>Edit</option><option>Publish</option><option>Eval</option></select><select class="fc" style="width:120px;"><option>All domains</option><option>Pensions</option><option>Wealth</option></select></div></div>
+  <div class="card">
+    <div class="adr"><div class="av8" style="background:var(--wl);color:var(--w);">SYS</div><div class="adr-b"><div class="adr-a"><strong>Arize AX eval alert fired</strong> — Drawdown Guidance v1.4 · Accuracy 81% · Hallucination 4.2% · Guardrail ×2 · Publish gate activated · Trace: <code style="background:var(--lgray);padding:1px 5px;border-radius:3px;font-family:monospace;">ekp-2025-0530-d14</code></div><div class="adr-t">Today 07:12 · Arize AX · Automated</div></div></div>
+    <div class="adr"><div class="av8" style="background:var(--navy);color:var(--yellow);">SP</div><div class="adr-b"><div class="adr-a"><strong>S. Patel</strong> edited <strong>Drawdown Guidance v1.4</strong> — GAD rate 2.75% → 3.25% · Pensions / Restricted</div><div class="adr-t">Today 06:48 · Editor · IP: 10.12.4.x · Diff saved</div></div></div>
+    <div class="adr"><div class="av8" style="background:var(--sl);color:var(--s);">SYS</div><div class="adr-b"><div class="adr-a"><strong>Scheduled sync completed</strong> — Pensions Ops Hub (SharePoint Modern) · 3 files updated · 0 errors</div><div class="adr-t">Today 07:00 · Ingestion · Job ID: sync-20250530-001</div></div></div>
+    <div class="adr"><div class="av8" style="background:var(--teal-l);color:var(--teal);">RK</div><div class="adr-b"><div class="adr-a"><strong>R. Khan</strong> published <strong>ISA Subscription Limits v1.2</strong> — Arize eval: 99% accuracy, 0.4% hallucination · Wealth / Internal · Live</div><div class="adr-t">Yesterday 14:20 · Publisher · Approved: R. Khan</div></div></div>
+    <div class="adr"><div class="av8" style="background:var(--il);color:var(--info);">MO</div><div class="adr-b"><div class="adr-a"><strong>M. Okafor</strong> submitted <strong>LTA Abolition FAQ v3.0</strong> for review · Pensions / Restricted · Pending: S. Patel</div><div class="adr-t">Yesterday 16:55 · Submit for review</div></div></div>
+    <div class="adr"><div class="av8" style="background:var(--navy);color:var(--yellow);">JT</div><div class="adr-b"><div class="adr-a"><strong>J. Thomson</strong> added <strong>D. Lee</strong> as Editor · Wealth domain · Provisioned via Aviva Entra ID SSO</div><div class="adr-t">Mon 09:14 · User management</div></div></div>
+    <div class="adr"><div class="av8" style="background:var(--teal-l);color:var(--teal);">SP</div><div class="adr-b"><div class="adr-a"><strong>S. Patel</strong> published <strong>Vulnerable Customer Handling v2.0</strong> · Arize eval: 97% accuracy · Both agents updated</div><div class="adr-t">Mon 11:30 · Publisher · Approved: S. Patel</div></div></div>
+  </div>
+</div>
+
+</main>
+</div>
+
+<!-- MODALS -->
+<div class="mo" id="m-src"><div class="mo-box"><div class="mo-hdr"><span class="mo-t">Add ingestion source</span><button class="btn btn-g btn-sm" onclick="closeM('m-src')"><i class="ti ti-x"></i></button></div><div class="mo-body"><div class="fg"><label class="fl">Source type</label><select class="fc"><option>SharePoint Modern</option><option>SharePoint Classic</option><option>PDF upload</option><option>Word (.docx)</option><option>External website</option></select></div><div class="fg"><label class="fl">Source name</label><input class="fc" placeholder="e.g. Pensions Ops Hub"></div><div class="fg"><label class="fl">URL or site path</label><input class="fc" placeholder="https://aviva.sharepoint.com/sites/..."></div><div class="fg"><label class="fl">Target domain</label><select class="fc"><option>Pensions</option><option>Wealth</option></select></div><div class="fg"><label class="fl">Sync schedule</label><select class="fc"><option>Nightly (07:00)</option><option>Weekly (Monday)</option><option>Manual only</option></select></div><div class="fg" style="margin-bottom:0;"><label class="fl">Default sensitivity</label><select class="fc"><option>Internal</option><option>Restricted</option><option>Highly restricted</option></select></div></div><div class="mo-foot"><button class="btn" onclick="closeM('m-src')">Cancel</button><button class="btn btn-p" onclick="closeM('m-src');showToast('Source added — first sync starting')">Add and sync</button></div></div></div>
+<div class="mo" id="m-upl"><div class="mo-box"><div class="mo-hdr"><span class="mo-t">Upload file</span><button class="btn btn-g btn-sm" onclick="closeM('m-upl')"><i class="ti ti-x"></i></button></div><div class="mo-body"><div style="border:2px dashed var(--navy);border-radius:var(--rl);padding:24px;text-align:center;margin-bottom:13px;background:var(--xgray);"><i class="ti ti-upload" style="font-size:30px;color:var(--navy);display:block;margin-bottom:8px;"></i><div style="font-weight:700;color:var(--navy);margin-bottom:3px;">Annual_Allowance_2025.pdf</div><div style="font-size:12px;color:var(--mgray);">2.4 MB · Ready</div></div><div class="fg"><label class="fl">Domain</label><select class="fc"><option>Pensions</option><option>Wealth</option></select></div><div class="fg"><label class="fl">Sensitivity</label><select class="fc"><option>Restricted</option><option>Internal</option></select></div><div class="fg" style="margin-bottom:0;"><label class="fl">Owner</label><input class="fc" value="S. Patel"></div></div><div class="mo-foot"><button class="btn" onclick="closeM('m-upl')">Cancel</button><button class="btn btn-p" onclick="closeM('m-upl');showToast('Uploading and ingesting...')">Upload and ingest</button></div></div></div>
+<div class="mo" id="m-pub"><div class="mo-box"><div class="mo-hdr"><span class="mo-t">Submit for review</span><button class="btn btn-g btn-sm" onclick="closeM('m-pub')"><i class="ti ti-x"></i></button></div><div class="mo-body"><div class="notif w" style="margin-bottom:13px;"><i class="ti ti-alert-triangle"></i><div class="notif-b"><strong>Eval gate active.</strong> Accuracy 81% — publish blocked until evals pass.</div></div><div class="fg"><label class="fl">Reviewer</label><select class="fc"><option>S. Patel (Pensions domain owner)</option><option>J. Thomson (Admin)</option></select></div><div class="fg"><label class="fl">Change summary</label><textarea class="fc">Updated GAD rate 2.75% to 3.25% for 2025/26. Source: HMRC pension tables April 2025.</textarea></div><div class="fg" style="margin-bottom:0;"><label class="fl">Review deadline</label><input type="date" class="fc" value="2025-06-06"></div></div><div class="mo-foot"><button class="btn" onclick="closeM('m-pub')">Cancel</button><button class="btn btn-p" onclick="closeM('m-pub');showToast('Submitted to S. Patel for review')">Submit for review</button></div></div></div>
+<div class="mo" id="m-vp"><div class="mo-box" style="width:580px;max-width:95vw;"><div class="mo-hdr"><div><div class="mo-t">Understanding capped drawdown</div><div style="font-size:11px;color:var(--mgray);margin-top:2px;">Pensions ops guide · v1.3 · Live</div></div><button class="btn btn-g btn-sm" onclick="closeM('m-vp')"><i class="ti ti-x"></i></button></div><div class="mo-body" style="max-height:420px;overflow-y:auto;"><div style="display:flex;gap:7px;flex-wrap:wrap;margin-bottom:14px;"><span class="bdg bdg-s">Live</span><span class="dom-t" style="font-size:10px;">Pensions</span><span class="sens-r">Restricted</span></div><h2 style="font-size:15px;font-weight:700;color:var(--navy);margin-bottom:8px;">What is capped drawdown?</h2><p style="font-size:13px;color:var(--mgray);line-height:1.7;margin-bottom:9px;">Capped drawdown is available to customers who entered drawdown before 6 April 2015. The maximum income is limited to 150% of the GAD annuity rate.</p><div style="background:var(--teal-l);border-left:3px solid var(--teal);padding:9px 13px;border-radius:0 var(--r) var(--r) 0;margin:11px 0;"><p style="font-size:12px;font-weight:600;color:var(--teal);margin:0;">Switching from capped to flexi-access drawdown triggers the MPAA. Always confirm arrangement type before advising.</p></div><h2 style="font-size:14px;font-weight:600;color:var(--charcoal);margin:13px 0 6px;">Income limits</h2><p style="font-size:13px;color:var(--mgray);line-height:1.7;">GAD reference rate for 2025/26 is <strong style="color:var(--navy);">3.25%</strong>. Maximum income = 150% of GAD annuity rate × fund value. Reviews required at each pension birthday or within 3 years.</p></div><div class="mo-foot"><button class="btn btn-g btn-sm" onclick="showToast('Exported as PDF')"><i class="ti ti-download"></i> PDF</button><button class="btn" onclick="closeM('m-vp');nav('editor')"><i class="ti ti-edit"></i> Edit source</button><button class="btn btn-g btn-sm" onclick="closeM('m-vp')">Close</button></div></div></div>
+<div class="mo" id="m-nf"><div class="mo-box"><div class="mo-hdr"><span class="mo-t">New knowledge file</span><button class="btn btn-g btn-sm" onclick="closeM('m-nf')"><i class="ti ti-x"></i></button></div><div class="mo-body"><div class="fg"><label class="fl">Title</label><input class="fc" placeholder="e.g. MPAA trigger events — pensions guide"></div><div class="fg"><label class="fl">Domain</label><select class="fc"><option>Pensions</option><option>Wealth</option></select></div><div class="fg"><label class="fl">Sensitivity</label><select class="fc"><option>Restricted</option><option>Internal</option><option>Highly restricted</option></select></div><div class="fg"><label class="fl">Owner</label><input class="fc" placeholder="e.g. S. Patel"></div><div class="fg" style="margin-bottom:0;"><label class="fl">Start from</label><select class="fc"><option>Blank file</option><option>SOP template</option><option>FAQ template</option><option>Process guide template</option></select></div></div><div class="mo-foot"><button class="btn" onclick="closeM('m-nf')">Cancel</button><button class="btn btn-p" onclick="closeM('m-nf');nav('editor');showToast('New file created')">Create and edit</button></div></div></div>
+<div class="mo" id="m-np"><div class="mo-box"><div class="mo-hdr"><span class="mo-t">Create new guide</span><button class="btn btn-g btn-sm" onclick="closeM('m-np')"><i class="ti ti-x"></i></button></div><div class="mo-body"><div class="fg"><label class="fl">Guide title</label><input class="fc" placeholder="e.g. Drawdown and MPAA — adviser guide"></div><div class="fg"><label class="fl">Guide type</label><select class="fc"><option>Process guide</option><option>Training module</option><option>SOP</option><option>FAQ</option></select></div><div class="fg"><label class="fl">Domain</label><select class="fc"><option>Pensions</option><option>Wealth</option></select></div><div class="fg" style="margin-bottom:0;"><label class="fl">Include knowledge files</label><div style="border:1px solid var(--bd);border-radius:var(--r);padding:9px;font-size:12px;"><label style="display:flex;align-items:center;gap:7px;padding:3px 0;cursor:pointer;"><input type="checkbox" checked> Drawdown guidance — income limits</label><label style="display:flex;align-items:center;gap:7px;padding:3px 0;cursor:pointer;"><input type="checkbox"> Annual allowance limits 2025/26</label><label style="display:flex;align-items:center;gap:7px;padding:3px 0;cursor:pointer;"><input type="checkbox"> Vulnerable customer handling</label></div></div></div><div class="mo-foot"><button class="btn" onclick="closeM('m-np')">Cancel</button><button class="btn btn-p" onclick="closeM('m-np');showToast('Guide created and queued for review')">Create guide</button></div></div></div>
+<div class="mo" id="m-user"><div class="mo-box"><div class="mo-hdr"><span class="mo-t">Add user</span><button class="btn btn-g btn-sm" onclick="closeM('m-user')"><i class="ti ti-x"></i></button></div><div class="mo-body"><div class="notif i" style="margin-bottom:13px;"><i class="ti ti-info-circle"></i><div class="notif-b">Users provisioned via Aviva Entra ID SSO. Enter their Aviva email to send an activation link.</div></div><div class="fg"><label class="fl">Aviva email</label><input class="fc" placeholder="firstname.lastname@aviva.com"></div><div class="fg"><label class="fl">Role</label><select class="fc"><option>Viewer</option><option>Editor</option><option>Domain owner</option><option>Auditor</option></select></div><div class="fg" style="margin-bottom:0;"><label class="fl">Domain access</label><select class="fc"><option>Pensions only</option><option>Wealth only</option><option>Pensions and Wealth</option></select></div></div><div class="mo-foot"><button class="btn" onclick="closeM('m-user')">Cancel</button><button class="btn btn-p" onclick="closeM('m-user');showToast('Invite sent via Entra ID')">Send invite</button></div></div></div>
+<div class="mo" id="m-qa"><div class="mo-box"><div class="mo-hdr"><span class="mo-t">Add golden dataset Q&amp;A</span><button class="btn btn-g btn-sm" onclick="closeM('m-qa')"><i class="ti ti-x"></i></button></div><div class="mo-body"><div class="fg"><label class="fl">Question</label><textarea class="fc" rows="2" placeholder="What is the maximum capped drawdown income in 2025/26?"></textarea></div><div class="fg"><label class="fl">Expected answer</label><textarea class="fc" rows="2" placeholder="150% of the GAD annuity rate at 3.25%"></textarea></div><div class="fg"><label class="fl">Domain</label><select class="fc"><option>Pensions</option><option>Wealth</option></select></div><div class="fg" style="margin-bottom:0;"><label class="fl">Source knowledge file</label><select class="fc"><option>Drawdown guidance — income limits</option><option>Annual allowance limits</option><option>LTA abolition FAQ</option></select></div></div><div class="mo-foot"><button class="btn" onclick="closeM('m-qa')">Cancel</button><button class="btn btn-p" onclick="closeM('m-qa');showToast('Q&A added to golden dataset')">Add to dataset</button></div></div></div>
+
+<div class="toast" id="toast"><i class="ti ti-check" style="font-size:14px;"></i><span id="tmsg"></span></div>
+
+<script>
+function nav(p){
+  document.querySelectorAll('.page').forEach(x=>x.classList.remove('active'));
+  document.querySelectorAll('.nav').forEach(x=>x.classList.remove('active'));
+  document.getElementById('page-'+p).classList.add('active');
+  const m={dashboard:'dashboard',ingestion:'ingestion',knowledge:'knowledge store',editor:'editor',pages:'published',evals:'evaluation',arize:'arize',governance:'access',audit:'audit'};
+  document.querySelectorAll('.nav').forEach(n=>{if(n.textContent.toLowerCase().includes(m[p]||'__'))n.classList.add('active');});
+}
+function showToast(m){const t=document.getElementById('toast');document.getElementById('tmsg').textContent=m;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),3200);}
+function openM(id){document.getElementById(id).classList.add('open');}
+function closeM(id){document.getElementById(id).classList.remove('open');}
+document.querySelectorAll('.mo').forEach(o=>o.addEventListener('click',e=>{if(e.target===o)o.classList.remove('open');}));
+let er=false;
+function runEval(){
+  if(er)return;er=true;
+  showToast('Running eval suite — pushing to Arize AX...');
+  setTimeout(()=>{showToast('Eval passed — accuracy 93% · Arize updated · Publish gate cleared');er=false;document.getElementById('ev-b').textContent='0';},3500);
+}
+function filterK(q){document.querySelectorAll('.ki').forEach(i=>{i.style.display=(!q||i.textContent.toLowerCase().includes(q.toLowerCase()))?'':'none';});}
+</script>
+</body>
+</html>
